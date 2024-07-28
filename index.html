@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDeeplx Translator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>PDeeplx Translator</h1>
+        <textarea id="input" placeholder="Enter text to translate"></textarea>
+        <div class="controls">
+            <select id="language">
+                <option value="ZH">Chinese</option>
+                <option value="EN">English</option>
+                <option value="JA">Japanese</option>
+                <option value="KO">Korean</option>
+                <option value="FR">French</option>
+                <option value="DE">German</option>
+                <option value="ES">Spanish</option>
+            </select>
+            <button id="translate">Translate</button>
+        </div>
+        <textarea id="output" readonly></textarea>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
