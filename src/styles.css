@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to right, #eef2f3, #8e9eab);
+    background: linear-gradient(to right, #fffde7, #fff8e1);
     color: #333;
     display: flex;
     justify-content: center;
@@ -16,8 +16,8 @@ body {
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 1200px;
+    width: 90%;
+    max-width: 1400px;
     text-align: center;
     box-sizing: border-box;
 }
@@ -43,14 +43,10 @@ body {
 }
 
 .input-section, .output-section {
-    flex: 1;
+    flex: 2;
     display: flex;
     flex-direction: column;
     position: relative;
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .button-section {
@@ -76,6 +72,7 @@ body {
     box-sizing: border-box;
     resize: none;
     flex: 1;
+    cursor: text;
 }
 
 .input-box {
@@ -118,8 +115,12 @@ body {
 .char-count {
     font-size: 12px;
     color: #666;
-    text-align: right;
+    position: relative;
+    bottom: 0;
     margin-top: -10px;
+    left: 0;
+    width: 100%;
+    text-align: right;
 }
 
 /* 响应式布局 */
