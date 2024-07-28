@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to right, #6a11cb, #2575fc);
+    background: linear-gradient(to right, #fffde7, #fff8e1);
     color: #333;
     display: flex;
     justify-content: center;
@@ -17,7 +17,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 600px;
+    max-width: 900px;
     text-align: center;
     box-sizing: border-box;
 }
@@ -28,33 +28,38 @@ body {
     color: #333;
 }
 
-.input-box, .output-box {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
-.input-box {
-    height: 150px;
-}
-
-.output-box {
-    height: 150px;
-    background-color: #f9f9f9;
-}
-
-.select-container {
+.translation-container {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.language-select {
+.input-section, .output-section {
     width: 48%;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-box, .output-box {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.input-box {
+    height: 250px;
+}
+
+.output-box {
+    height: 250px;
+    background-color: #f9f9f9;
+}
+
+.language-select {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -69,9 +74,10 @@ body {
     border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .translate-button:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
 }

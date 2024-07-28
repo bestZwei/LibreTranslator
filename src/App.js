@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './styles.css';
 
 const languages = [
+    { code: 'auto', name: '自动检测' },
     { code: 'ar', name: '阿拉伯语' },
     { code: 'bg', name: '保加利亚语' },
     { code: 'zh', name: '中文' },
@@ -37,7 +38,7 @@ const languages = [
 const App = () => {
     const [text, setText] = useState('');
     const [translatedText, setTranslatedText] = useState('');
-    const [sourceLang, setSourceLang] = useState('en');
+    const [sourceLang, setSourceLang] = useState('auto');
     const [targetLang, setTargetLang] = useState('zh');
 
     const handleTranslate = async () => {
@@ -60,39 +61,43 @@ const App = () => {
     return (
         <div className="container">
             <h1 className="title">DeepLx Translator</h1>
-            <textarea 
-                className="input-box" 
-                value={text} 
-                onChange={(e) => setText(e.target.value)} 
-                placeholder="Enter text"
-            ></textarea>
-            <div className="select-container">
-                <select 
-                    className="language-select" 
-                    value={sourceLang} 
-                    onChange={(e) => setSourceLang(e.target.value)}
-                >
-                    {languages.map(lang => (
-                        <option key={lang.code} value={lang.code}>{lang.name}</option>
-                    ))}
-                </select>
-                <select 
-                    className="language-select" 
-                    value={targetLang} 
-                    onChange={(e) => setTargetLang(e.target.value)}
-                >
-                    {languages.map(lang => (
-                        <option key={lang.code} value={lang.code}>{lang.name}</option>
-                    ))}
-                </select>
+            <div className="translation-container">
+                <div className="input-section">
+                    <textarea 
+                        className="input-box" 
+                        value={text} 
+                        onChange={(e) => setText(e.target.value)} 
+                        placeholder="Enter text"
+                    ></textarea>
+                    <select 
+                        className="language-select" 
+                        value={sourceLang} 
+                        onChange={(e) => setSourceLang(e.target.value)}
+                    >
+                        {languages.map(lang => (
+                            <option key={lang.code} value={lang.code}>{lang.name}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className="output-section">
+                    <textarea 
+                        className="output-box" 
+                        value={translatedText} 
+                        readOnly 
+                        placeholder="Translation"
+                    ></textarea>
+                    <select 
+                        className="language-select" 
+                        value={targetLang} 
+                        onChange={(e) => setTargetLang(e.target.value)}
+                    >
+                        {languages.map(lang => (
+                            <option key={lang.code} value={lang.code}>{lang.name}</option>
+                        ))}
+                    </select>
+                </div>
             </div>
             <button className="translate-button" onClick={handleTranslate}>Translate</button>
-            <textarea 
-                className="output-box" 
-                value={translatedText} 
-                readOnly 
-                placeholder="Translation"
-            ></textarea>
         </div>
     );
 };
