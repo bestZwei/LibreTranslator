@@ -42,7 +42,8 @@ body {
 }
 
 .input-section, .output-section {
-    width: 48%;
+    width: 100%;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
 }
@@ -58,11 +59,11 @@ body {
 }
 
 .input-box {
-    height: 250px;
+    height: 200px;
 }
 
 .output-box {
-    height: 250px;
+    height: 200px;
     background-color: #f9f9f9;
 }
 
@@ -95,4 +96,11 @@ body {
     color: #666;
     margin-top: -10px;
     margin-bottom: 10px;
+}
+
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
