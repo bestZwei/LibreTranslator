@@ -85,13 +85,15 @@ const App = () => {
                             <option key={lang.code} value={lang.code}>{lang.name}</option>
                         ))}
                     </select>
-                    <textarea 
-                        className="input-box" 
-                        value={text} 
-                        onChange={handleTextChange} 
-                        placeholder="输入文本"
-                    ></textarea>
-                    <div className="char-count">{inputCharCount} 字符</div>
+                    <div className="text-area-container">
+                        <textarea 
+                            className="input-box" 
+                            value={text} 
+                            onChange={handleTextChange} 
+                            placeholder="输入文本"
+                        ></textarea>
+                        <div className="char-count">{inputCharCount} 字符</div>
+                    </div>
                     <button className="translate-button" onClick={handleTranslate}>翻译</button>
                 </div>
                 <div className="output-section">
@@ -104,13 +106,15 @@ const App = () => {
                             <option key={lang.code} value={lang.code}>{lang.name}</option>
                         ))}
                     </select>
-                    <textarea 
-                        className="output-box" 
-                        value={translatedText} 
-                        readOnly 
-                        placeholder="翻译"
-                    ></textarea>
-                    <div className="char-count">{outputCharCount} 字符</div>
+                    <div className="text-area-container">
+                        <textarea 
+                            className="output-box" 
+                            value={translatedText} 
+                            readOnly 
+                            placeholder="翻译"
+                        ></textarea>
+                        <div className="char-count">{outputCharCount} 字符</div>
+                    </div>
                     <button className="copy-button" onClick={handleCopy}>复制</button>
                 </div>
             </div>
