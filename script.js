@@ -14,24 +14,24 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       try {
-          const response = await fetch('/.netlify/functions/translate', {
+          const response = await fetch('/translate', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
-                  'X-Access-Password': prompt('Enter access password:')
               },
               body: JSON.stringify({ text, targetLang })
           });
 
           if (!response.ok) {
-              throw new Error('Translation failed');
+              const errorText = await response.text();
+              throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
           }
 
           const data = await response.json();
           outputText.value = data.translatedText;
       } catch (error) {
-          console.error('Error:', error);
-          alert('An error occurred during translation');
+          console.error('Error details:', error);
+          alert(`An error occurred during translation: ${error.message}`);
       }
   });
 });
