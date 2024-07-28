@@ -66,7 +66,6 @@ const App = () => {
                 onChange={(e) => setText(e.target.value)} 
                 placeholder="Enter text"
             ></textarea>
-            <br/>
             <div className="select-container">
                 <select 
                     className="language-select" 
@@ -87,9 +86,13 @@ const App = () => {
                     ))}
                 </select>
             </div>
-            <br/>
             <button className="translate-button" onClick={handleTranslate}>Translate</button>
-            <p className="output-box">Translated Text: {translatedText}</p>
+            <textarea 
+                className="output-box" 
+                value={translatedText} 
+                readOnly 
+                placeholder="Translation"
+            ></textarea>
         </div>
     );
 };
