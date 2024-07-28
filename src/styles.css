@@ -16,22 +16,29 @@ body {
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 900px;
+    width: 80%;
+    max-width: 1200px;
     text-align: center;
     box-sizing: border-box;
 }
 
 .title {
     font-size: 32px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     color: #333;
+}
+
+.subtitle {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #666;
 }
 
 .translation-container {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .input-section, .output-section {
@@ -66,7 +73,7 @@ body {
     font-size: 16px;
 }
 
-.translate-button {
+.translate-button, .copy-button {
     background-color: #007bff;
     color: white;
     padding: 15px 30px;
@@ -75,9 +82,17 @@ body {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 10px;
 }
 
-.translate-button:hover {
+.translate-button:hover, .copy-button:hover {
     background-color: #0056b3;
     transform: scale(1.05);
+}
+
+.char-count {
+    font-size: 12px;
+    color: #666;
+    margin-top: -10px;
+    margin-bottom: 10px;
 }

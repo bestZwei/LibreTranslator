@@ -40,6 +40,8 @@ const App = () => {
     const [translatedText, setTranslatedText] = useState('');
     const [sourceLang, setSourceLang] = useState('auto');
     const [targetLang, setTargetLang] = useState('zh');
+    const [inputCharCount, setInputCharCount] = useState(0);
+    const [outputCharCount, setOutputCharCount] = useState(0);
 
     const handleTranslate = async () => {
         const response = await fetch(`https://api.deeplx.org/nZyuEfvNhWk8Xfh2BP_0Dk3ZEnk5SdFIwA_8jaaAM8Q/translate`, {
@@ -56,19 +58,31 @@ const App = () => {
 
         const data = await response.json();
         setTranslatedText(data.data);
+        setOutputCharCount(data.data.length);
+    };
+
+    const handleTextChange = (e) => {
+        setText(e.target.value);
+        setInputCharCount(e.target.value.length);
+    };
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(translatedText);
     };
 
     return (
         <div className="container">
-            <h1 className="title">DeepLx Translator</h1>
+            <h1 className="title">LibreTranslator</h1>
+            <p className="subtitle">Based on DeepLx</p>
             <div className="translation-container">
                 <div className="input-section">
                     <textarea 
                         className="input-box" 
                         value={text} 
-                        onChange={(e) => setText(e.target.value)} 
+                        onChange={handleTextChange} 
                         placeholder="Enter text"
                     ></textarea>
+                    <small className="char-count">{inputCharCount} characters</small>
                     <select 
                         className="language-select" 
                         value={sourceLang} 
@@ -86,6 +100,7 @@ const App = () => {
                         readOnly 
                         placeholder="Translation"
                     ></textarea>
+                    <small className="char-count">{outputCharCount} characters</small>
                     <select 
                         className="language-select" 
                         value={targetLang} 
@@ -95,6 +110,7 @@ const App = () => {
                             <option key={lang.code} value={lang.code}>{lang.name}</option>
                         ))}
                     </select>
+                    <button className="copy-button" onClick={handleCopy}>Copy</button>
                 </div>
             </div>
             <button className="translate-button" onClick={handleTranslate}>Translate</button>
