@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to right, #fffde7, #fff8e1);
+    background: linear-gradient(to right, #eef2f3, #8e9eab);
     color: #333;
     display: flex;
     justify-content: center;
@@ -9,15 +9,6 @@ body {
     height: 100vh;
     padding: 0 20px;
     box-sizing: border-box;
-    user-select: none;
-}
-
-body * {
-    cursor: default;
-}
-
-textarea, select, button {
-    cursor: text;
 }
 
 .container {
@@ -26,7 +17,7 @@ textarea, select, button {
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 1400px;
+    max-width: 1200px;
     text-align: center;
     box-sizing: border-box;
 }
@@ -48,14 +39,18 @@ textarea, select, button {
     justify-content: space-between;
     margin-bottom: 20px;
     gap: 20px;
-    width: 90%;
+    width: 100%;
 }
 
 .input-section, .output-section {
-    flex: 2;
+    flex: 1;
     display: flex;
     flex-direction: column;
     position: relative;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .button-section {
@@ -123,9 +118,8 @@ textarea, select, button {
 .char-count {
     font-size: 12px;
     color: #666;
-    position: absolute;
-    bottom: 30px;
-    left: 10px;
+    text-align: right;
+    margin-top: -10px;
 }
 
 /* 响应式布局 */
