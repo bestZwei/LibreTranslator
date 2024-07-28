@@ -91,7 +91,7 @@ const App = () => {
                         onChange={handleTextChange} 
                         placeholder="输入文本"
                     ></textarea>
-                    <div className="input-char-count">{inputCharCount} 字符</div>
+                    <div className="char-count">{inputCharCount} 字符</div>
                     <button className="translate-button" onClick={handleTranslate}>翻译</button>
                 </div>
                 <div className="output-section">
@@ -110,7 +110,7 @@ const App = () => {
                         readOnly 
                         placeholder="翻译"
                     ></textarea>
-                    <div className="output-char-count">{outputCharCount} 字符</div>
+                    <div className="char-count">{outputCharCount} 字符</div>
                     <button className="copy-button" onClick={handleCopy}>复制</button>
                 </div>
             </div>
