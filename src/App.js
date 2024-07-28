@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './styles.css';
 
 const languages = [
@@ -42,27 +42,9 @@ const App = () => {
     const [targetLang, setTargetLang] = useState('zh');
     const [inputCharCount, setInputCharCount] = useState(0);
     const [outputCharCount, setOutputCharCount] = useState(0);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [password, setPassword] = useState('');
-
-    useEffect(() => {
-        const storedAuth = localStorage.getItem('isAuthenticated');
-        if (storedAuth === 'true') {
-            setIsAuthenticated(true);
-        }
-    }, []);
-
-    const handleAuthentication = () => {
-        if (password === process.env.REACT_APP_PASSWORD) {
-            setIsAuthenticated(true);
-            localStorage.setItem('isAuthenticated', 'true');
-        } else {
-            alert('密码错误');
-        }
-    };
 
     const handleTranslate = async () => {
-        const response = await fetch(`${process.env.REACT_APP_DEEPLX_API_URL}/translate`, {
+        const response = await fetch(`${process.env.REACT_APP_DEEPLX_API_URL}/translate?token=your_access_token`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -98,21 +80,6 @@ const App = () => {
         setSourceLang(newSourceLang);
         setTargetLang(newTargetLang);
     };
-
-    if (!isAuthenticated) {
-        return (
-            <div className="auth-container">
-                <h1>请输入访问密码</h1>
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="输入密码"
-                />
-                <button onClick={handleAuthentication}>提交</button>
-            </div>
-        );
-    }
 
     return (
         <div className="container">
