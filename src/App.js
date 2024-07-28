@@ -44,7 +44,7 @@ const App = () => {
     const [outputCharCount, setOutputCharCount] = useState(0);
 
     const handleTranslate = async () => {
-        const response = await fetch(`${process.env.REACT_APP_DEEPLX_API_URL}/translate?token=${process.env.REACT_APP_DEEPLX_API_KEY}`, {
+        const response = await fetch(`${process.env.REACT_APP_DEEPLX_API_URL}/translate?token=your_access_token`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -76,13 +76,6 @@ const App = () => {
             <p className="subtitle">基于 DeepLx 的翻译器</p>
             <div className="translation-container">
                 <div className="input-section">
-                    <textarea 
-                        className="input-box" 
-                        value={text} 
-                        onChange={handleTextChange} 
-                        placeholder="输入文本"
-                    ></textarea>
-                    <small className="char-count">{inputCharCount} 字符</small>
                     <select 
                         className="language-select" 
                         value={sourceLang} 
@@ -92,15 +85,16 @@ const App = () => {
                             <option key={lang.code} value={lang.code}>{lang.name}</option>
                         ))}
                     </select>
+                    <textarea 
+                        className="input-box" 
+                        value={text} 
+                        onChange={handleTextChange} 
+                        placeholder="输入文本"
+                    ></textarea>
+                    <button className="translate-button" onClick={handleTranslate}>翻译</button>
+                    <small className="char-count">{inputCharCount} 字符</small>
                 </div>
                 <div className="output-section">
-                    <textarea 
-                        className="output-box" 
-                        value={translatedText} 
-                        readOnly 
-                        placeholder="翻译"
-                    ></textarea>
-                    <small className="char-count">{outputCharCount} 字符</small>
                     <select 
                         className="language-select" 
                         value={targetLang} 
@@ -110,11 +104,15 @@ const App = () => {
                             <option key={lang.code} value={lang.code}>{lang.name}</option>
                         ))}
                     </select>
+                    <textarea 
+                        className="output-box" 
+                        value={translatedText} 
+                        readOnly 
+                        placeholder="翻译"
+                    ></textarea>
                     <button className="copy-button" onClick={handleCopy}>复制</button>
+                    <small className="char-count">{outputCharCount} 字符</small>
                 </div>
-            </div>
-            <div className="button-container">
-                <button className="translate-button" onClick={handleTranslate}>翻译</button>
             </div>
         </div>
     );
