@@ -13,11 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
       }
 
+      const accessPassword = prompt('Enter access password:');
+
       try {
           const response = await fetch('/translate', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
+                  'X-Access-Password': accessPassword
               },
               body: JSON.stringify({ text, targetLang })
           });
