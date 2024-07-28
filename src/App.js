@@ -70,6 +70,16 @@ const App = () => {
         navigator.clipboard.writeText(translatedText);
     };
 
+    const handleSwapLanguages = () => {
+        if (sourceLang === 'auto' || targetLang === 'auto') {
+            alert('自动检测语言不支持交换');
+            return;
+        }
+
+        setSourceLang(targetLang);
+        setTargetLang(sourceLang);
+    };
+
     return (
         <div className="container">
             <h1 className="title">LibreTranslator</h1>
@@ -94,7 +104,11 @@ const App = () => {
                         ></textarea>
                         <div className="char-count">{inputCharCount} 字符</div>
                     </div>
+                </div>
+                <div className="buttons-container">
                     <button className="translate-button" onClick={handleTranslate}>翻译</button>
+                    <button className="swap-button" onClick={handleSwapLanguages}>交换语言</button>
+                    <button className="copy-button" onClick={handleCopy}>复制</button>
                 </div>
                 <div className="output-section">
                     <select 
@@ -115,7 +129,6 @@ const App = () => {
                         ></textarea>
                         <div className="char-count">{outputCharCount} 字符</div>
                     </div>
-                    <button className="copy-button" onClick={handleCopy}>复制</button>
                 </div>
             </div>
         </div>
