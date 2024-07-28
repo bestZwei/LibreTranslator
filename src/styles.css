@@ -9,6 +9,15 @@ body {
     height: 100vh;
     padding: 0 20px;
     box-sizing: border-box;
+    user-select: none;
+}
+
+body * {
+    cursor: default;
+}
+
+textarea, select, button {
+    cursor: text;
 }
 
 .container {
@@ -39,7 +48,7 @@ body {
     justify-content: space-between;
     margin-bottom: 20px;
     gap: 20px;
-    width: 100%;
+    width: 90%;
 }
 
 .input-section, .output-section {
@@ -115,7 +124,7 @@ body {
     font-size: 12px;
     color: #666;
     position: absolute;
-    bottom: 10px;
+    bottom: 30px;
     left: 10px;
 }
 
