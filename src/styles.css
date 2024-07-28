@@ -6,8 +6,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    padding: 0 20px;
+    min-height: 100vh;
+    padding: 20px;
     box-sizing: border-box;
 }
 
@@ -17,7 +17,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 1400px;
+    max-width: 1600px;
     text-align: center;
     box-sizing: border-box;
 }
@@ -43,7 +43,7 @@ body {
 }
 
 .input-section, .output-section {
-    flex: 1;
+    flex: 2;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -55,6 +55,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    flex: 0 0 auto;
 }
 
 .text-area-container {
@@ -72,14 +73,10 @@ body {
     box-sizing: border-box;
     resize: none;
     flex: 1;
-}
-
-.input-box {
-    height: calc(100vh - 300px);
+    min-height: 300px;
 }
 
 .output-box {
-    height: calc(100vh - 300px);
     background-color: #f9f9f9;
 }
 
@@ -119,8 +116,31 @@ body {
     left: 10px;
 }
 
+.auth-container {
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.auth-container input {
+    margin: 10px 0;
+    padding: 10px;
+    width: 200px;
+}
+
+.auth-container button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 /* 响应式布局 */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .translation-container {
         flex-direction: column;
         align-items: center;
@@ -128,6 +148,7 @@ body {
 
     .button-section {
         flex-direction: row;
+        margin: 20px 0;
     }
 
     .translate-button, .swap-button, .copy-button {
@@ -136,6 +157,6 @@ body {
     }
 
     .input-box, .output-box {
-        height: 200px;
+        min-height: 200px;
     }
 }
