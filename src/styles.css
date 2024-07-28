@@ -17,7 +17,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     text-align: center;
     box-sizing: border-box;
 }
@@ -38,8 +38,8 @@ body {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-    flex-wrap: wrap;
-    gap: 40px;
+    gap: 20px;
+    width: 100%;
 }
 
 .input-section, .output-section {
@@ -47,11 +47,19 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
-    min-width: 45%;
+}
+
+.button-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .text-area-container {
     position: relative;
+    flex: 1;
 }
 
 .input-box, .output-box {
@@ -60,17 +68,18 @@ body {
     border: 1px solid #ccc;
     border-radius: 8px;
     margin-bottom: 10px;
-    font-size: 18px;
+    font-size: 16px;
     box-sizing: border-box;
     resize: none;
+    flex: 1;
 }
 
 .input-box {
-    height: 350px;
+    height: calc(100vh - 300px);
 }
 
 .output-box {
-    height: 350px;
+    height: calc(100vh - 300px);
     background-color: #f9f9f9;
 }
 
@@ -83,15 +92,7 @@ body {
     box-sizing: border-box;
 }
 
-.buttons-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-    align-self: center;
-}
-
-.translate-button, .copy-button, .swap-button {
+.translate-button, .swap-button, .copy-button {
     background-color: #007bff;
     color: white;
     padding: 15px 30px;
@@ -103,10 +104,9 @@ body {
     margin-top: 10px;
     width: 100%;
     max-width: 200px;
-    align-self: center;
 }
 
-.translate-button:hover, .copy-button:hover, .swap-button:hover {
+.translate-button:hover, .swap-button:hover, .copy-button:hover {
     background-color: #0056b3;
     transform: scale(1.05);
 }
@@ -126,12 +126,16 @@ body {
         align-items: center;
     }
 
-    .input-section, .output-section {
-        width: 100%;
+    .button-section {
+        flex-direction: row;
     }
 
-    .buttons-container {
-        flex-direction: row;
-        gap: 20px;
+    .translate-button, .swap-button, .copy-button {
+        max-width: none;
+        margin-top: 0;
+    }
+
+    .input-box, .output-box {
+        height: 200px;
     }
 }

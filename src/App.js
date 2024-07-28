@@ -71,13 +71,14 @@ const App = () => {
     };
 
     const handleSwapLanguages = () => {
-        if (sourceLang === 'auto' || targetLang === 'auto') {
-            alert('自动检测语言不支持交换');
+        if (sourceLang === 'auto') {
+            alert('交换无效，无法交换为自动检测语言');
             return;
         }
-
-        setSourceLang(targetLang);
-        setTargetLang(sourceLang);
+        const newSourceLang = targetLang;
+        const newTargetLang = sourceLang;
+        setSourceLang(newSourceLang);
+        setTargetLang(newTargetLang);
     };
 
     return (
@@ -105,9 +106,9 @@ const App = () => {
                         <div className="char-count">{inputCharCount} 字符</div>
                     </div>
                 </div>
-                <div className="buttons-container">
+                <div className="button-section">
                     <button className="translate-button" onClick={handleTranslate}>翻译</button>
-                    <button className="swap-button" onClick={handleSwapLanguages}>交换语言</button>
+                    <button className="swap-button" onClick={handleSwapLanguages}>交换</button>
                     <button className="copy-button" onClick={handleCopy}>复制</button>
                 </div>
                 <div className="output-section">
