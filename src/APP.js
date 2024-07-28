@@ -31,12 +31,12 @@ const App = () => {
             <select value={sourceLang} onChange={(e) => setSourceLang(e.target.value)}>
                 <option value="en">English</option>
                 <option value="zh">Chinese</option>
-                <!-- Add other languages as needed -->
+
             </select>
             <select value={targetLang} onChange={(e) => setTargetLang(e.target.value)}>
                 <option value="en">English</option>
                 <option value="zh">Chinese</option>
-                <!-- Add other languages as needed -->
+
             </select>
             <br/>
             <button onClick={handleTranslate}>Translate</button>
