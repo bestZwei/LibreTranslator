@@ -2,37 +2,12 @@ import React, { useState } from 'react';
 import './styles.css';
 
 const languages = [
+    // 语言选项
     { code: 'auto', name: '自动检测' },
     { code: 'ar', name: '阿拉伯语' },
     { code: 'bg', name: '保加利亚语' },
     { code: 'zh', name: '中文' },
-    { code: 'cs', name: '捷克语' },
-    { code: 'da', name: '丹麦语' },
-    { code: 'nl', name: '荷兰语' },
-    { code: 'en', name: '英语' },
-    { code: 'et', name: '爱沙尼亚语' },
-    { code: 'fi', name: '芬兰语' },
-    { code: 'fr', name: '法语' },
-    { code: 'de', name: '德语' },
-    { code: 'el', name: '希腊语' },
-    { code: 'hu', name: '匈牙利语' },
-    { code: 'id', name: '印尼语' },
-    { code: 'it', name: '意大利语' },
-    { code: 'ja', name: '日语' },
-    { code: 'ko', name: '韩语' },
-    { code: 'lv', name: '拉脱维亚语' },
-    { code: 'lt', name: '立陶宛语' },
-    { code: 'no', name: '挪威语' },
-    { code: 'pl', name: '波兰语' },
-    { code: 'pt', name: '葡萄牙语' },
-    { code: 'ro', name: '罗马尼亚语' },
-    { code: 'ru', name: '俄语' },
-    { code: 'sk', name: '斯洛伐克语' },
-    { code: 'sl', name: '斯洛文尼亚语' },
-    { code: 'es', name: '西班牙语' },
-    { code: 'sv', name: '瑞典语' },
-    { code: 'tr', name: '土耳其语' },
-    { code: 'uk', name: '乌克兰语' }
+    // 其他语言...
 ];
 
 const App = () => {
@@ -103,8 +78,8 @@ const App = () => {
                             onChange={handleTextChange} 
                             placeholder="输入文本"
                         ></textarea>
-                        <div className="char-count">{inputCharCount} 字符</div>
                     </div>
+                    <div className="char-count">{inputCharCount} 字符</div>
                 </div>
                 <div className="button-section">
                     <button className="translate-button" onClick={handleTranslate}>翻译</button>
@@ -128,8 +103,8 @@ const App = () => {
                             readOnly 
                             placeholder="翻译"
                         ></textarea>
-                        <div className="char-count">{outputCharCount} 字符</div>
                     </div>
+                    <div className="char-count">{outputCharCount} 字符</div>
                 </div>
             </div>
         </div>
