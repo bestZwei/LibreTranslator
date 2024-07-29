@@ -8,7 +8,7 @@ const sourceLanguages = [
     { code: 'da', name: '丹麦语' },
     { code: 'de', name: '德语' },
     { code: 'el', name: '希腊语' },
-    { code: 'en', name: '英语（所有变体）' }, // 增加对所有变体的支持
+    { code: 'en', name: '英语' }, // 修改为“英语”
     { code: 'es', name: '西班牙语' },
     { code: 'et', name: '爱沙尼亚语' },
     { code: 'fi', name: '芬兰语' },
@@ -23,7 +23,7 @@ const sourceLanguages = [
     { code: 'nb', name: '挪威语' },
     { code: 'nl', name: '荷兰语' },
     { code: 'pl', name: '波兰语' },
-    { code: 'pt', name: '葡萄牙语（所有变体）' }, // 增加对所有变体的支持
+    { code: 'pt', name: '葡萄牙语' }, // 修改为“葡萄牙语”
     { code: 'ro', name: '罗马尼亚语' },
     { code: 'ru', name: '俄语' },
     { code: 'sk', name: '斯洛伐克语' },
@@ -31,7 +31,7 @@ const sourceLanguages = [
     { code: 'sv', name: '瑞典语' },
     { code: 'tr', name: '土耳其语' },
     { code: 'uk', name: '乌克兰语' },
-    { code: 'zh', name: '中文（所有变体）' } // 增加对所有变体的支持
+    { code: 'zh', name: '中文' } // 修改为“中文”
 ];
 
 const targetLanguages = [
@@ -41,6 +41,7 @@ const targetLanguages = [
     { code: 'da', name: '丹麦语' },
     { code: 'de', name: '德语' },
     { code: 'el', name: '希腊语' },
+    { code: 'en', name: '英语' }, // 修改为“英语”
     { code: 'en-GB', name: '英语（英式）' },
     { code: 'en-US', name: '英语（美式）' },
     { code: 'es', name: '西班牙语' },
@@ -57,8 +58,9 @@ const targetLanguages = [
     { code: 'nb', name: '挪威语' },
     { code: 'nl', name: '荷兰语' },
     { code: 'pl', name: '波兰语' },
-    { code: 'pt-BR', name: '葡萄牙语（巴西）' }, // 增加对巴西葡萄牙语的支持
-    { code: 'pt-PT', name: '葡萄牙语（葡萄牙）' }, // 增加对葡萄牙葡萄牙语的支持
+    { code: 'pt', name: '葡萄牙语' }, // 修改为“葡萄牙语”
+    { code: 'pt-BR', name: '葡萄牙语（巴西）' },
+    { code: 'pt-PT', name: '葡萄牙语（除巴西）' },
     { code: 'ro', name: '罗马尼亚语' },
     { code: 'ru', name: '俄语' },
     { code: 'sk', name: '斯洛伐克语' },
@@ -66,9 +68,9 @@ const targetLanguages = [
     { code: 'sv', name: '瑞典语' },
     { code: 'tr', name: '土耳其语' },
     { code: 'uk', name: '乌克兰语' },
-    { code: 'zh', name: '中文（所有变体）' }, // 增加对所有变体的支持
+    { code: 'zh', name: '中文' }, // 修改为“中文”
     { code: 'zh-HANS', name: '中文（简体）' },
-    { code: 'zh-HANT', name: '中文（繁体）' } // 增加对中文繁体的支持
+    { code: 'zh-HANT', name: '中文（繁体）' }
 ];
 
 const App = () => {
@@ -165,19 +167,19 @@ const App = () => {
             let newSourceLang = targetLang;
             let newTargetLang = sourceLang;
 
-            // 如果原目标语言是英式或美式英语，交换后源语言设置为“英语（所有变体）”
+            // 处理英语变体
             if (targetLang === 'en-GB' || targetLang === 'en-US') {
-                newSourceLang = 'en'; // 设置源语言为“英语（所有变体）”
+                newSourceLang = 'en'; // 设置源语言为“英语”
             }
 
-            // 如果原目标语言是葡萄牙语（巴西）或葡萄牙语（葡萄牙），交换后源语言设置为“葡萄牙语（所有变体）”
-            if (targetLang === 'pt-BR' || targetLang === 'pt-PT') {
-                newSourceLang = 'pt'; // 设置源语言为“葡萄牙语（所有变体）”
+            // 处理葡萄牙语变体
+            if (targetLang === 'pt' || targetLang === 'pt-BR' || targetLang === 'pt-PT') {
+                newSourceLang = 'pt'; // 设置源语言为“葡萄牙语”
             }
 
-            // 如果目标语言是繁体中文，源语言设置为简体中文
-            if (targetLang === 'zh-HANT') {
-                newSourceLang = 'zh'; // 源语言设置为简体中文
+            // 处理中文变体
+            if (targetLang === 'zh' || targetLang === 'zh-HANS' || targetLang === 'zh-HANT') {
+                newSourceLang = 'zh'; // 设置源语言为“中文”
             }
 
             setSourceLang(newSourceLang);
