@@ -8,7 +8,7 @@ const sourceLanguages = [
     { code: 'da', name: '丹麦语' },
     { code: 'de', name: '德语' },
     { code: 'el', name: '希腊语' },
-    { code: 'en', name: '英语' }, // 修改为“英语”
+    { code: 'EN', name: '英语' }, 
     { code: 'es', name: '西班牙语' },
     { code: 'et', name: '爱沙尼亚语' },
     { code: 'fi', name: '芬兰语' },
@@ -23,7 +23,7 @@ const sourceLanguages = [
     { code: 'nb', name: '挪威语' },
     { code: 'nl', name: '荷兰语' },
     { code: 'pl', name: '波兰语' },
-    { code: 'pt', name: '葡萄牙语' }, // 修改为“葡萄牙语”
+    { code: 'PT', name: '葡萄牙语' }, 
     { code: 'ro', name: '罗马尼亚语' },
     { code: 'ru', name: '俄语' },
     { code: 'sk', name: '斯洛伐克语' },
@@ -31,7 +31,7 @@ const sourceLanguages = [
     { code: 'sv', name: '瑞典语' },
     { code: 'tr', name: '土耳其语' },
     { code: 'uk', name: '乌克兰语' },
-    { code: 'zh', name: '中文' } // 修改为“中文”
+    { code: 'ZH', name: '中文' } 
 ];
 
 const targetLanguages = [
@@ -41,9 +41,9 @@ const targetLanguages = [
     { code: 'da', name: '丹麦语' },
     { code: 'de', name: '德语' },
     { code: 'el', name: '希腊语' },
-    { code: 'en', name: '英语' }, // 修改为“英语”
-    { code: 'en-GB', name: '英语（英式）' },
-    { code: 'en-US', name: '英语（美式）' },
+    { code: 'EN', name: '英语' }, 
+    { code: 'EN-GB', name: '英语（英式）' },
+    { code: 'EN-US', name: '英语（美式）' },
     { code: 'es', name: '西班牙语' },
     { code: 'et', name: '爱沙尼亚语' },
     { code: 'fi', name: '芬兰语' },
@@ -58,9 +58,9 @@ const targetLanguages = [
     { code: 'nb', name: '挪威语' },
     { code: 'nl', name: '荷兰语' },
     { code: 'pl', name: '波兰语' },
-    { code: 'pt', name: '葡萄牙语' }, // 修改为“葡萄牙语”
-    { code: 'pt-BR', name: '葡萄牙语（巴西）' },
-    { code: 'pt-PT', name: '葡萄牙语（除巴西）' },
+    { code: 'PT', name: '葡萄牙语' }, 
+    { code: 'PT-BR', name: '葡萄牙语（巴西）' },
+    { code: 'PT-PT', name: '葡萄牙语（除巴西）' },
     { code: 'ro', name: '罗马尼亚语' },
     { code: 'ru', name: '俄语' },
     { code: 'sk', name: '斯洛伐克语' },
@@ -68,16 +68,16 @@ const targetLanguages = [
     { code: 'sv', name: '瑞典语' },
     { code: 'tr', name: '土耳其语' },
     { code: 'uk', name: '乌克兰语' },
-    { code: 'zh', name: '中文' }, // 修改为“中文”
-    { code: 'zh-HANS', name: '中文（简体）' },
-    { code: 'zh-HANT', name: '中文（繁体）' }
+    { code: 'ZH', name: '中文' }, 
+    { code: 'ZH-HANS', name: '中文（简体）' },
+    { code: 'ZH-HANT', name: '中文（繁体）' }
 ];
 
 const App = () => {
     const [text, setText] = useState('');
     const [translatedText, setTranslatedText] = useState('');
-    const [sourceLang, setSourceLang] = useState('zh');
-    const [targetLang, setTargetLang] = useState('en');
+    const [sourceLang, setSourceLang] = useState('ZH');
+    const [targetLang, setTargetLang] = useState('EN');
     const [inputCharCount, setInputCharCount] = useState(0);
     const [outputCharCount, setOutputCharCount] = useState(0);
     const [message, setMessage] = useState('');
@@ -92,8 +92,8 @@ const App = () => {
                 },
                 body: JSON.stringify({
                     text: text,
-                    source_lang: sourceLang.toUpperCase(), // 转换为大写
-                    target_lang: targetLang.toUpperCase() // 转换为大写
+                    source_lang: sourceLang.toUpperCase(), 
+                    target_lang: targetLang.toUpperCase() 
                 })
             });
 
@@ -168,18 +168,18 @@ const App = () => {
             let newTargetLang = sourceLang;
 
             // 处理英语变体
-            if (targetLang === 'en-GB' || targetLang === 'en-US') {
-                newSourceLang = 'en'; // 设置源语言为“英语”
+            if (targetLang === 'EN-GB' || targetLang === 'EN-US') {
+                newSourceLang = 'EN'; // 设置源语言为“英语”
             }
 
             // 处理葡萄牙语变体
-            if (targetLang === 'pt' || targetLang === 'pt-BR' || targetLang === 'pt-PT') {
-                newSourceLang = 'pt'; // 设置源语言为“葡萄牙语”
+            if (targetLang === 'PT' || targetLang === 'PT-BR' || targetLang === 'PT-PT') {
+                newSourceLang = 'PT'; // 设置源语言为“葡萄牙语”
             }
 
             // 处理中文变体
-            if (targetLang === 'zh' || targetLang === 'zh-HANS' || targetLang === 'zh-HANT') {
-                newSourceLang = 'zh'; // 设置源语言为“中文”
+            if (targetLang === 'ZH' || targetLang === 'ZH-HANS' || targetLang === 'ZH-HANT') {
+                newSourceLang = 'ZH'; // 设置源语言为“中文”
             }
 
             setSourceLang(newSourceLang);
