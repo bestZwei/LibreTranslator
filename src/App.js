@@ -8,7 +8,7 @@ const sourceLanguages = [
     { code: 'da', name: '丹麦语' },
     { code: 'de', name: '德语' },
     { code: 'el', name: '希腊语' },
-    { code: 'en', name: '英语（未指定）' },
+    { code: 'en', name: '英语' }, // 修改为“英语”
     { code: 'es', name: '西班牙语' },
     { code: 'et', name: '爱沙尼亚语' },
     { code: 'fi', name: '芬兰语' },
@@ -80,35 +80,43 @@ const App = () => {
     const [isError, setIsError] = useState(false);
 
     const handleTranslate = async () => {
-        const response = await fetch(`${process.env.REACT_APP_DEEPLX_API_URL}/translate?token=your_access_token`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                text: text,
-                source_lang: sourceLang,
-                target_lang: targetLang
-            })
-        });
+        try {
+            const response = await fetch(`${process.env.REACT_APP_DEEPLX_API_URL}/translate?token=your_access_token`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    text: text,
+                    source_lang: sourceLang,
+                    target_lang: targetLang
+                })
+            });
 
-        const data = await response.json();
+            const data = await response.json();
 
-        // 判断翻译是否成功
-        if (data.success) {
-            setTranslatedText(data.data);
-            setOutputCharCount(data.data.length);
-            setMessage('翻译成功！');
-            setIsError(false);
-        } else {
-            setMessage('翻译失败，请重试。');
+            // 判断翻译是否成功
+            if (data.success) {
+                setTranslatedText(data.data);
+                setOutputCharCount(data.data.length);
+                setMessage('翻译成功！');
+                setIsError(false);
+            } else {
+                setMessage('翻译失败，请重试。');
+                setIsError(true);
+            }
+
+            // 2秒后清除提示信息
+            setTimeout(() => {
+                setMessage('');
+            }, 2000);
+        } catch (error) {
+            setMessage('翻译请求出错，请检查网络连接。');
             setIsError(true);
+            setTimeout(() => {
+                setMessage('');
+            }, 2000);
         }
-
-        // 2秒后清除提示信息
-        setTimeout(() => {
-            setMessage('');
-        }, 2000);
     };
 
     const handleTextChange = (e) => {
@@ -152,8 +160,14 @@ const App = () => {
         const isTargetValid = targetLanguages.some(lang => lang.code === sourceLang);
 
         if (isSourceValid && isTargetValid) {
-            const newSourceLang = targetLang;
-            const newTargetLang = sourceLang;
+            let newSourceLang = targetLang;
+            let newTargetLang = sourceLang;
+
+            // 如果原目标语言是英式或美式英语，交换后源语言设置为“英语”
+            if (targetLang === 'en-GB' || targetLang === 'en-US') {
+                newSourceLang = 'en'; // 设置源语言为“英语”
+            }
+
             setSourceLang(newSourceLang);
             setTargetLang(newTargetLang);
         } else {
@@ -164,8 +178,7 @@ const App = () => {
     return (
         <div className="container">
             <h1 className="title">LibreTranslator</h1>
-            <p className="subtitle">基于 DeepLx 的翻译器</p>
-            {message && <div className={`message ${isError ? 'error' : 'success'}`}>{message}</div>} {/* 提示信息 */}
+            <div className={`message ${isError ? 'error' : 'success'} ${message ? 'visible' : ''}`}>{message}</div> {/* 提示信息 */}
             <div className="translation-container">
                 <div className="input-section">
                     <select 

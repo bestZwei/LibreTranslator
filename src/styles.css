@@ -40,17 +40,21 @@ body {
     color: #333;
 }
 
-.subtitle {
-    font-size: 18px;
-    margin-bottom: 20px;
-    color: #666;
-}
-
 .message {
-    margin-bottom: 10px;
+    position: fixed; /* 悬浮显示 */
+    top: 20px; /* 距离顶部20px */
+    left: 50%; /* 水平居中 */
+    transform: translateX(-50%); /* 使其完全居中 */
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 10px;
     border-radius: 5px;
     transition: opacity 0.5s;
+    opacity: 0; /* 初始透明度为0 */
+    z-index: 1000; /* 确保在最上层 */
+}
+
+.message.visible {
+    opacity: 1; /* 当提示框可见时，透明度为1 */
 }
 
 .success {
