@@ -193,52 +193,50 @@ const App = () => {
         <div className="container">
             <h1 className="title">LibreTranslator</h1>
             <div className={`message ${isError ? 'error' : 'success'} ${message ? 'visible' : ''}`}>{message}</div> {/* 提示信息 */}
-            <div className="translation-container">
-                <div className="input-section">
-                    <select 
-                        className="language-select" 
-                        value={sourceLang} 
-                        onChange={(e) => setSourceLang(e.target.value)}
-                    >
-                        {sourceLanguages.map(lang => (
-                            <option key={lang.code} value={lang.code}>{lang.name}</option>
-                        ))}
-                    </select>
-                    <div className="text-area-container">
-                        <textarea 
-                            className="input-box" 
-                            value={text} 
-                            onChange={handleTextChange} 
-                            placeholder="输入文本"
-                        ></textarea>
-                        <div className="char-count">{inputCharCount} 字符</div>
-                    </div>
+            <div className="language-selection">
+                <select 
+                    className="language-select" 
+                    value={sourceLang} 
+                    onChange={(e) => setSourceLang(e.target.value)}
+                >
+                    {sourceLanguages.map(lang => (
+                        <option key={lang.code} value={lang.code}>{lang.name}</option>
+                    ))}
+                </select>
+                <button className="swap-button" onClick={handleSwapLanguages}>交换语言</button>
+                <select 
+                    className="language-select" 
+                    value={targetLang} 
+                    onChange={(e) => setTargetLang(e.target.value)}
+                >
+                    {targetLanguages.map(lang => (
+                        <option key={lang.code} value={lang.code}>{lang.name}</option>
+                    ))}
+                </select>
+            </div>
+            <div className="text-area-wrapper">
+                <div className="text-area-container">
+                    <textarea 
+                        className="input-box" 
+                        value={text} 
+                        onChange={handleTextChange} 
+                        placeholder="输入文本"
+                    ></textarea>
+                    <div className="char-count">{inputCharCount} 字符</div>
                 </div>
-                <div className="button-section">
-                    <button className="translate-button" onClick={handleTranslate}>翻译</button>
-                    <button className="swap-button" onClick={handleSwapLanguages}>交换语言</button>
-                    <button className="copy-button" onClick={handleCopy}>复制结果</button>
+                <div className="text-area-container">
+                    <textarea 
+                        className="output-box" 
+                        value={translatedText} 
+                        readOnly 
+                        placeholder="翻译结果"
+                    ></textarea>
+                    <div className="char-count">{outputCharCount} 字符</div>
                 </div>
-                <div className="output-section">
-                    <select 
-                        className="language-select" 
-                        value={targetLang} 
-                        onChange={(e) => setTargetLang(e.target.value)}
-                    >
-                        {targetLanguages.map(lang => (
-                            <option key={lang.code} value={lang.code}>{lang.name}</option>
-                        ))}
-                    </select>
-                    <div className="text-area-container">
-                        <textarea 
-                            className="output-box" 
-                            value={translatedText} 
-                            readOnly 
-                            placeholder="翻译结果"
-                        ></textarea>
-                        <div className="char-count">{outputCharCount} 字符</div>
-                    </div>
-                </div>
+            </div>
+            <div className="button-section">
+                <button className="translate-button" onClick={handleTranslate}>翻译</button>
+                <button className="copy-button" onClick={handleCopy}>复制结果</button>
             </div>
         </div>
     );

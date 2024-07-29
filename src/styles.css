@@ -36,7 +36,7 @@ body {
 
 .title {
     font-size: 36px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     color: #333;
 }
 
@@ -67,6 +67,14 @@ body {
     color: #721c24; /* 错误提示文字色 */
 }
 
+.language-selection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
 .translation-container {
     display: flex;
     justify-content: space-between;
@@ -74,6 +82,13 @@ body {
     gap: 10px;
     width: 100%;
     height: 100%;
+}
+
+.text-area-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 .input-section, .output-section {
@@ -85,15 +100,16 @@ body {
 
 .button-section {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 }
 
 .text-area-container {
     position: relative;
     flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .input-box, .output-box {
@@ -110,17 +126,7 @@ body {
     background-color: #f9f9f9;
 }
 
-.input-box {
-    height: calc(100% - 60px);
-}
-
-.output-box {
-    height: calc(100% - 60px);
-    background-color: #f9f9f9;
-}
-
 .language-select {
-    margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
