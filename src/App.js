@@ -130,6 +130,11 @@ const App = () => {
         setInputCharCount(e.target.value.length);
     };
 
+    const handleOutputChange = (e) => {
+        setTranslatedText(e.target.value);
+        setOutputCharCount(e.target.value.length);
+    };
+
     const handleCopy = (textToCopy) => {
         navigator.clipboard.writeText(textToCopy)
             .then(() => {
@@ -152,7 +157,11 @@ const App = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container" onClick={(e) => {
+            if (e.target.tagName !== 'TEXTAREA' && e.target.tagName !== 'SELECT') {
+                e.stopPropagation(); // 阻止点击事件传播
+            }
+        }}>
             <h1>LibreTranslator</h1>
             <div className="language-selection">
                 <select value={sourceLang} onChange={(e) => setSourceLang(e.target.value)}>
@@ -183,7 +192,7 @@ const App = () => {
                 <div className="output-text-area">
                     <textarea
                         value={translatedText}
-                        readOnly
+                        onChange={handleOutputChange}
                         placeholder="翻译结果"
                         rows="10"
                     />

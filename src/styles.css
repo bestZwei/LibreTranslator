@@ -69,14 +69,14 @@ textarea {
     border: 1px solid #ddd;
     resize: vertical;
     background-color: #fff;
-    height: 350px; /* 增加高度 */
+    height: 400px; /* 增加高度 */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 阴影效果 */
 }
 
 .input-text-area,
 .output-text-area {
     width: 100%;
-    max-width: 450px; /* 增加宽度 */
+    max-width: 500px; /* 增加宽度 */
     position: relative;
 }
 
