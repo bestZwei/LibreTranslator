@@ -21,7 +21,7 @@ body {
 }
 
 .container {
-    background: #fff;
+    background: #e0f7fa;  /* 浅绿色背景 */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -86,15 +86,16 @@ body {
     resize: none;
     flex: 1;
     cursor: text;
+    background-color: #fff;  /* 白色背景 */
 }
 
 .input-box {
-    height: calc(100vh - 160px);
+    height: calc(50vh - 60px);
 }
 
 .output-box {
-    height: calc(100vh - 160px);
-    background-color: #f9f9f9;
+    height: calc(50vh - 60px);
+    background-color: #fff;  /* 白色背景 */
 }
 
 .language-select {
