@@ -3,7 +3,7 @@ html, body {
     height: 100%;
     width: 100%;
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to right, #fffde7, #fff8e1);
+    background: linear-gradient(to right, #e2f0d9, #d2e6f2); /* 更柔和的背景色 */
     color: #333;
     display: flex;
     justify-content: center;
@@ -21,7 +21,7 @@ body {
 }
 
 .container {
-    background: #e0f7fa;  /* 浅绿色背景 */
+    background: #ffffff; /* 白色背景 */
     padding: 20px;
     border-radius: 20px; /* 圆角调整 */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -86,7 +86,7 @@ body {
     resize: none;
     flex: 1;
     cursor: text;
-    background-color: #fff;  /* 白色背景 */
+    background-color: #f9f9f9;  /* 更柔和的背景 */
 }
 
 .input-box {
@@ -95,7 +95,7 @@ body {
 
 .output-box {
     height: calc(100% - 60px); /* 调整高度以适应整个容器 */
-    background-color: #fff;  /* 白色背景 */
+    background-color: #f9f9f9;  /* 更柔和的背景 */
 }
 
 .language-select {
@@ -108,7 +108,7 @@ body {
 }
 
 .translate-button, .swap-button, .copy-button {
-    background: linear-gradient(135deg, #007bff, #00c6ff);
+    background: linear-gradient(135deg, #5cb85c, #60c8a1); /* 更柔和的渐变色 */
     color: white;
     padding: 10px 20px;
     border: 2px solid transparent; /* 添加轮廓线 */
@@ -122,8 +122,8 @@ body {
 }
 
 .translate-button:hover, .swap-button:hover, .copy-button:hover {
-    background: linear-gradient(135deg, #0056b3, #0092cc);
-    border: 2px solid #0056b3; /* 悬停时添加轮廓线 */
+    background: linear-gradient(135deg, #4cae4c, #50b89f); /* 悬停时的渐变色 */
+    border: 2px solid #4cae4c; /* 悬停时添加轮廓线 */
     transform: scale(1.05);
 }
 
@@ -133,6 +133,13 @@ body {
     position: absolute; /* 绝对定位 */
     bottom: 5px; /* 移动到输入框和输出框的右下方 */
     right: 10px; /* 右侧间距 */
+}
+
+/* 只在输入框和输出框中显示光标 */
+.input-box:focus,
+.output-box:focus {
+    outline: none; /* 去除默认的焦点样式 */
+    border: 1px solid #5cb85c; /* 聚焦时的边框颜色 */
 }
 
 /* 响应式布局 */
