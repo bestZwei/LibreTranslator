@@ -66,7 +66,7 @@ LibreTranslator 是一个基于 React 的翻译工具，利用 DeepLx API 提供
 
    这个变量用于配置 Node.js 的选项，通常用于解决某些依赖包的兼容性问题。
 
-# https://api.deeplx.org/token* 可以从 https://api.deeplx.org/ 获取
+###### https://api.deeplx.org/token* 可以从 https://api.deeplx.org/ 获取
 
 ---
 
