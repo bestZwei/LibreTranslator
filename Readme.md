@@ -34,8 +34,8 @@ LibreTranslator 是一个基于 React 的翻译工具，利用 DeepLx API 提供
 
 #### 1、使用 Cloudflare Pages 部署
 
-1. 登录到 [Cloudflare](https://www.cloudflare.com/) 并创建一个帐户（如果没有）。
-2. 在 Cloudflare Dashboard 中，选择 "Pages"。
+1. Fork 本仓库。
+2. 登录到 [Cloudflare](https://www.cloudflare.com/) ，在 Cloudflare Dashboard 中，选择 "Pages"。
 3. 点击 "Create a Project"。
 4. 连接到您的 GitHub 存储库，并选择该项目。
 5. 在 "Configure your build" 步骤中，使用以下设置：
@@ -46,8 +46,8 @@ LibreTranslator 是一个基于 React 的翻译工具，利用 DeepLx API 提供
 
 #### 2、使用 Vercel 部署
 
-1. 登录到 [Vercel](https://vercel.com/) 并创建一个帐户（如果没有）。
-2. 点击 "New Project"。
+1. Fork 本仓库。
+2. 登录到 Vercel，点击 "New Project"。
 3. 连接到您的 GitHub 存储库，并选择该项目。
 4. Vercel 会自动检测到您使用的是 React 项目。您可以使用默认设置。
 5. 点击 "Deploy"。
@@ -65,6 +65,8 @@ LibreTranslator 是一个基于 React 的翻译工具，利用 DeepLx API 提供
 3. **NODE_OPTIONS**:`--openssl-legacy-provider`   
 
    这个变量用于配置 Node.js 的选项，通常用于解决某些依赖包的兼容性问题。
+
+# https://api.deeplx.org/token* 可以从 https://api.deeplx.org/ 获取
 
 ---
 
