@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import './styles.css';
 
 const languages = [
-    // 语言选项
     { code: 'auto', name: '自动检测' },
     { code: 'ar', name: '阿拉伯语' },
     { code: 'bg', name: '保加利亚语' },
     { code: 'zh', name: '中文' },
+    { code: 'en', name: '英语' },
     // 其他语言...
 ];
 

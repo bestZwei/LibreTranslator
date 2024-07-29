@@ -12,7 +12,7 @@ html, body {
 }
 
 body {
-    padding: 0 20px;
+    padding: 0;
 }
 
 #root {
@@ -90,11 +90,11 @@ body {
 }
 
 .input-box {
-    height: calc(50vh - 40px); /* 调整高度 */
+    height: calc(100% - 60px); /* 调整高度以适应整个容器 */
 }
 
 .output-box {
-    height: calc(50vh - 40px); /* 调整高度 */
+    height: calc(100% - 60px); /* 调整高度以适应整个容器 */
     background-color: #fff;  /* 白色背景 */
 }
 
