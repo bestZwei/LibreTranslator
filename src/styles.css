@@ -98,15 +98,15 @@ textarea {
     font-size: 14px;
     padding: 5px 10px;
     border: none;
-    background-color: #b2e0b2; /* 浅草绿色 */
-    color: #fff;
+    background-color: #000; /* 黑色底 */
+    color: #fff; /* 白色字 */
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .copy-button:hover {
-    background-color: #99cc99; /* 更深的绿色 */
+    background-color: #333; /* 更深的黑色 */
 }
 
 .buttons {
