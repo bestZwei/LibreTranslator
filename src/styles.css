@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #fff9e6; /* 更浅的黄色底色 */
+    background-color: #fff9e6; 
 }
 
 .container {
@@ -52,13 +52,13 @@ h1 {
 
 .text-areas {
     display: flex;
-    justify-content: space-between; /* 调整为左右对称 */
+    justify-content: space-between;
     margin-bottom: 20px;
 }
 
 .text-areas div {
     margin: 0 10px;
-    width: 100%; /* 占据更大的宽度 */
+    width: 100%; 
 }
 
 textarea {
@@ -69,14 +69,14 @@ textarea {
     border: 1px solid #ddd;
     resize: vertical;
     background-color: #fff;
-    height: 400px; /* 增加高度 */
+    height: 400px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 阴影效果 */
 }
 
 .input-text-area,
 .output-text-area {
     width: 100%;
-    max-width: 500px; /* 增加宽度 */
+    max-width: 550px; 
     position: relative;
 }
 
@@ -99,15 +99,15 @@ textarea {
     font-size: 14px;
     padding: 5px 10px;
     border: none;
-    background-color: #000; /* 黑色底 */
-    color: #fff; /* 白色字 */
+    background-color: #000; 
+    color: #fff; 
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .copy-button:hover {
-    background-color: #333; /* 更深的黑色 */
+    background-color: #333; 
 }
 
 .buttons {

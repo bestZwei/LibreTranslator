@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.css';
 
 const sourceLanguages = [
@@ -83,6 +83,17 @@ const App = () => {
     const [message, setMessage] = useState('');
     const [isError, setIsError] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [password, setPassword] = useState('');
+
+    useEffect(() => {
+        const userPassword = prompt("请输入访问口令：");
+        if (userPassword === process.env.REACT_APP_PASSWORD) {
+            setIsAuthenticated(true);
+        } else {
+            alert("口令错误，无法访问该应用。");
+        }
+    }, []);
 
     const handleTranslate = async () => {
         setLoading(true);
@@ -156,12 +167,12 @@ const App = () => {
         setTargetLang(sourceLang);
     };
 
+    if (!isAuthenticated) {
+        return null; // 如果未认证，返回null，阻止渲染
+    }
+
     return (
-        <div className="container" onClick={(e) => {
-            if (e.target.tagName !== 'TEXTAREA' && e.target.tagName !== 'SELECT') {
-                e.stopPropagation(); // 阻止点击事件传播
-            }
-        }}>
+        <div className="container">
             <h1>LibreTranslator</h1>
             <div className="language-selection">
                 <select value={sourceLang} onChange={(e) => setSourceLang(e.target.value)}>
