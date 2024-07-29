@@ -173,7 +173,7 @@ const App = () => {
                     />
                     <div className="info-bar">
                         <div className="char-count">字符数: {inputCharCount}</div>
-                        <button onClick={() => handleCopy(text)} className="copy-button">复制文本</button>
+                        <button onClick={() => handleCopy(text)} className="copy-button">复制</button>
                     </div>
                 </div>
                 <div className="output-text-area">
@@ -185,7 +185,7 @@ const App = () => {
                     />
                     <div className="info-bar">
                         <div className="char-count">字符数: {outputCharCount}</div>
-                        <button onClick={() => handleCopy(translatedText)} className="copy-button">复制文本</button>
+                        <button onClick={() => handleCopy(translatedText)} className="copy-button">复制</button>
                     </div>
                 </div>
             </div>
