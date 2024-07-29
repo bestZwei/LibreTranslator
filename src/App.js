@@ -5,11 +5,13 @@ const languages = [
     { code: 'auto', name: '自动检测' },
     { code: 'ar', name: '阿拉伯语' },
     { code: 'bg', name: '保加利亚语' },
-    { code: 'zh', name: '中文' },
+    { code: 'zh', name: '中文（简体）' },
+    { code: 'zh-TW', name: '中文（繁体）' },
     { code: 'cs', name: '捷克语' },
     { code: 'da', name: '丹麦语' },
     { code: 'nl', name: '荷兰语' },
-    { code: 'en', name: '英语' },
+    { code: 'en-GB', name: '英语（英式）' },
+    { code: 'en-US', name: '英语（美式）' },
     { code: 'et', name: '爱沙尼亚语' },
     { code: 'fi', name: '芬兰语' },
     { code: 'fr', name: '法语' },
@@ -25,6 +27,7 @@ const languages = [
     { code: 'no', name: '挪威语' },
     { code: 'pl', name: '波兰语' },
     { code: 'pt', name: '葡萄牙语' },
+    { code: 'pt-BR', name: '葡萄牙语（巴西）' },
     { code: 'ro', name: '罗马尼亚语' },
     { code: 'ru', name: '俄语' },
     { code: 'sk', name: '斯洛伐克语' },
@@ -103,7 +106,7 @@ const App = () => {
                             onChange={handleTextChange} 
                             placeholder="输入文本"
                         ></textarea>
-                        <div className="char-count">{inputCharCount} 字符</div> 
+                        <div className="char-count">{inputCharCount} 字符</div>
                     </div>
                 </div>
                 <div className="button-section">
@@ -126,9 +129,9 @@ const App = () => {
                             className="output-box" 
                             value={translatedText} 
                             readOnly 
-                            placeholder="翻译结果"  
+                            placeholder="翻译结果"
                         ></textarea>
-                        <div className="char-count">{outputCharCount} 字符</div> 
+                        <div className="char-count">{outputCharCount} 字符</div>
                     </div>
                 </div>
             </div>
