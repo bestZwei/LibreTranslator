@@ -129,8 +129,9 @@ body {
 .char-count {
     font-size: 12px;
     color: #666;
-    margin-top: 0; /* 移动到输入框和输出框下方 */
-    text-align: right;
+    position: absolute; /* 绝对定位 */
+    bottom: 5px; /* 移动到输入框和输出框的右下方 */
+    right: 10px; /* 右侧间距 */
 }
 
 /* 响应式布局 */

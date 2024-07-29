@@ -78,12 +78,12 @@ const App = () => {
                             onChange={handleTextChange} 
                             placeholder="输入文本"
                         ></textarea>
+                        <div className="char-count">{inputCharCount} 字符</div> {/* 移动到输入框右下方 */}
                     </div>
-                    <div className="char-count">{inputCharCount} 字符</div>
                 </div>
                 <div className="button-section">
                     <button className="translate-button" onClick={handleTranslate}>翻译</button>
-                    <button className="swap-button" onClick={handleSwapLanguages}>交换</button>
+                    <button className="swap-button" onClick={handleSwapLanguages}>交换语言</button> {/* 更改按钮文本 */}
                     <button className="copy-button" onClick={handleCopy}>复制结果</button>
                 </div>
                 <div className="output-section">
@@ -103,8 +103,8 @@ const App = () => {
                             readOnly 
                             placeholder="翻译"
                         ></textarea>
+                        <div className="char-count">{outputCharCount} 字符</div> {/* 移动到输出框右下方 */}
                     </div>
-                    <div className="char-count">{outputCharCount} 字符</div>
                 </div>
             </div>
         </div>
