@@ -82,8 +82,10 @@ const App = () => {
     const [outputCharCount, setOutputCharCount] = useState(0);
     const [message, setMessage] = useState('');
     const [isError, setIsError] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleTranslate = async () => {
+        setLoading(true);
         try {
             const response = await fetch(`${process.env.REACT_APP_DEEPLX_API_URL}/translate?token=${process.env.REACT_APP_PASSWORD}`, {
                 method: 'POST',
@@ -118,6 +120,8 @@ const App = () => {
             setTimeout(() => {
                 setMessage('');
             }, 2000);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -190,9 +194,15 @@ const App = () => {
                 </div>
             </div>
             <div className="buttons">
-                <button onClick={handleTranslate}>翻译</button>
+                <button onClick={handleTranslate} disabled={loading}>
+                    {loading ? '翻译中...' : '翻译'}
+                </button>
             </div>
-            {message && <div className={`message ${isError ? 'error' : 'success'}`}>{message}</div>}
+            {message && (
+                <div className={`message ${isError ? 'error' : 'success'}`}>
+                    {message}
+                </div>
+            )}
             <footer className="footer">
                 <a href="https://github.com/bestZwei/LibreTranslator" target="_blank" rel="noopener noreferrer">GitHub 仓库</a>
                 <span> | 基于DeepLx</span>

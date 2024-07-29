@@ -70,6 +70,7 @@ textarea {
     resize: vertical;
     background-color: #fff;
     height: 350px; /* 增加高度 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 阴影效果 */
 }
 
 .input-text-area,
@@ -131,17 +132,26 @@ button:hover {
     background-color: #218838;
 }
 
+button:disabled {
+    background-color: #ccc; /* 禁用状态 */
+    cursor: not-allowed;
+}
+
 .message {
     font-size: 16px;
     margin-top: 10px;
+    padding: 10px;
+    border-radius: 4px;
 }
 
 .success {
-    color: #28a745;
+    background-color: #d4edda; /* 绿色背景 */
+    color: #155724; /* 深绿色字 */
 }
 
 .error {
-    color: #dc3545;
+    background-color: #f8d7da; /* 红色背景 */
+    color: #721c24; /* 深红色字 */
 }
 
 .footer {
