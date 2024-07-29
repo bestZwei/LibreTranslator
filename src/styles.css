@@ -129,7 +129,7 @@ body {
 .char-count {
     font-size: 12px;
     color: #666;
-    margin-top: 5px; /* 调整位置 */
+    margin-top: 0; /* 移动到输入框和输出框下方 */
     text-align: right;
 }
 

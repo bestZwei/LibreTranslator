@@ -84,7 +84,7 @@ const App = () => {
                 <div className="button-section">
                     <button className="translate-button" onClick={handleTranslate}>翻译</button>
                     <button className="swap-button" onClick={handleSwapLanguages}>交换</button>
-                    <button className="copy-button" onClick={handleCopy}>复制</button>
+                    <button className="copy-button" onClick={handleCopy}>复制结果</button>
                 </div>
                 <div className="output-section">
                     <select 
