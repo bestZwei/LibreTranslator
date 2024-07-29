@@ -17,7 +17,7 @@ LibreTranslator 是一个基于 React 的翻译工具，利用 DeepLx API 提供
 ### 项目结构
 
 ```
-/pdeeplx
+/
 ├── /public
 │   ├── index.html
 │   └── styles.css
