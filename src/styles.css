@@ -58,6 +58,7 @@ h1 {
 
 .text-areas div {
     margin: 0 10px;
+    width: 100%; /* 占据更大的宽度 */
 }
 
 textarea {
@@ -68,7 +69,7 @@ textarea {
     border: 1px solid #ddd;
     resize: vertical;
     background-color: #fff;
-    height: 200px; /* 增加高度 */
+    height: 300px; /* 增加高度 */
 }
 
 .input-text-area,
@@ -86,6 +87,7 @@ textarea {
     padding: 10px;
     border-radius: 4px;
     margin-top: 10px;
+    width: 100%; /* 与文本框宽度一致 */
 }
 
 .char-count {
@@ -141,4 +143,19 @@ button:hover {
 
 .error {
     color: #dc3545;
+}
+
+.footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
 }

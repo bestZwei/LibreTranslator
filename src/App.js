@@ -193,6 +193,10 @@ const App = () => {
                 <button onClick={handleTranslate}>翻译</button>
             </div>
             {message && <div className={`message ${isError ? 'error' : 'success'}`}>{message}</div>}
+            <footer className="footer">
+                <a href="https://github.com/bestZwei/LibreTranslator" target="_blank" rel="noopener noreferrer">GitHub 仓库</a>
+                <span> | 基于DeepLx</span>
+            </footer>
         </div>
     );
 }
