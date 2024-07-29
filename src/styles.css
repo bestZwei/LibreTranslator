@@ -46,6 +46,23 @@ body {
     color: #666;
 }
 
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: opacity 0.5s;
+}
+
+.success {
+    background-color: #d4edda; /* 成功提示背景色 */
+    color: #155724; /* 成功提示文字色 */
+}
+
+.error {
+    background-color: #f8d7da; /* 错误提示背景色 */
+    color: #721c24; /* 错误提示文字色 */
+}
+
 .translation-container {
     display: flex;
     justify-content: space-between;
