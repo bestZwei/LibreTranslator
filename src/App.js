@@ -84,19 +84,20 @@ const App = () => {
             const response = await fetch(`${process.env.REACT_APP_DEEPLX_API_URL}/translate?token=your_access_token`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${process.env.REACT_APP_PASSWORD}` // 添加 Authorization 头
                 },
                 body: JSON.stringify({
                     text: text,
-                    source_lang: sourceLang,
-                    target_lang: targetLang
+                    source_lang: sourceLang.toUpperCase(), // 转换为大写
+                    target_lang: targetLang.toUpperCase() // 转换为大写
                 })
             });
 
             const data = await response.json();
 
             // 判断翻译是否成功
-            if (data.success) {
+            if (data.code === 200) {
                 setTranslatedText(data.data);
                 setOutputCharCount(data.data.length);
                 setMessage('翻译成功！');
