@@ -80,7 +80,7 @@ body {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     font-size: 16px;
     box-sizing: border-box;
     resize: none;
@@ -89,11 +89,11 @@ body {
 }
 
 .input-box {
-    height: calc(50vh - 80px);
+    height: calc(60vh - 100px);
 }
 
 .output-box {
-    height: calc(50vh - 80px);
+    height: calc(60vh - 100px);
     background-color: #f9f9f9;
 }
 
@@ -130,7 +130,7 @@ body {
     color: #666;
     position: relative;
     bottom: 0;
-    margin-top: -10px;
+    margin-top: -5px;
     left: 0;
     width: 100%;
     text-align: right;
