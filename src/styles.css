@@ -68,6 +68,7 @@ textarea {
     border: 1px solid #ddd;
     resize: vertical;
     background-color: #fff;
+    height: 200px; /* 增加高度 */
 }
 
 .input-text-area,
@@ -77,12 +78,34 @@ textarea {
     position: relative;
 }
 
+.info-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e9ecef; /* 灰色底 */
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
 .char-count {
-    position: absolute;
-    bottom: 5px;
-    right: 10px;
     font-size: 14px;
     color: #888;
+}
+
+.copy-button {
+    font-size: 14px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #28a745;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.copy-button:hover {
+    background-color: #218838;
 }
 
 .buttons {

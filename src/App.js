@@ -99,7 +99,6 @@ const App = () => {
 
             const data = await response.json();
 
-            // 判断翻译是否成功
             if (data.code === 200) {
                 setTranslatedText(data.data);
                 setOutputCharCount(data.data.length);
@@ -110,7 +109,6 @@ const App = () => {
                 setIsError(true);
             }
 
-            // 2秒后清除提示信息
             setTimeout(() => {
                 setMessage('');
             }, 2000);
@@ -128,29 +126,20 @@ const App = () => {
         setInputCharCount(e.target.value.length);
     };
 
-    const handleCopy = () => {
-        if (translatedText) {
-            navigator.clipboard.writeText(translatedText)
-                .then(() => {
-                    setMessage('结果已复制！');
-                    setIsError(false);
-                })
-                .catch(() => {
-                    setMessage('复制失败，请重试。');
-                    setIsError(true);
-                });
+    const handleCopy = (textToCopy) => {
+        navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+                setMessage('结果已复制！');
+                setIsError(false);
+            })
+            .catch(() => {
+                setMessage('复制失败，请重试。');
+                setIsError(true);
+            });
 
-            // 2秒后清除提示信息
-            setTimeout(() => {
-                setMessage('');
-            }, 2000);
-        } else {
-            setMessage('没有翻译结果可复制。');
-            setIsError(true);
-            setTimeout(() => {
-                setMessage('');
-            }, 2000);
-        }
+        setTimeout(() => {
+            setMessage('');
+        }, 2000);
     };
 
     const handleSwapLanguages = () => {
@@ -182,8 +171,9 @@ const App = () => {
                         placeholder="输入文本"
                         rows="10"
                     />
-                    <div className="char-count">
-                        字符数: {inputCharCount}
+                    <div className="info-bar">
+                        <div className="char-count">字符数: {inputCharCount}</div>
+                        <button onClick={() => handleCopy(text)} className="copy-button">复制文本</button>
                     </div>
                 </div>
                 <div className="output-text-area">
@@ -193,14 +183,14 @@ const App = () => {
                         placeholder="翻译结果"
                         rows="10"
                     />
-                    <div className="char-count">
-                        字符数: {outputCharCount}
+                    <div className="info-bar">
+                        <div className="char-count">字符数: {outputCharCount}</div>
+                        <button onClick={() => handleCopy(translatedText)} className="copy-button">复制文本</button>
                     </div>
                 </div>
             </div>
             <div className="buttons">
                 <button onClick={handleTranslate}>翻译</button>
-                <button onClick={handleCopy}>复制结果</button>
             </div>
             {message && <div className={`message ${isError ? 'error' : 'success'}`}>{message}</div>}
         </div>
