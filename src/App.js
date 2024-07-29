@@ -87,11 +87,17 @@ const App = () => {
     const [password, setPassword] = useState('');
 
     useEffect(() => {
-        const userPassword = prompt("请输入访问口令：");
-        if (userPassword === process.env.REACT_APP_PASSWORD) {
-            setIsAuthenticated(true);
+        const appPassword = process.env.REACT_APP_PASSWORD;
+
+        if (appPassword) {
+            const userPassword = prompt("请输入访问口令：");
+            if (userPassword === appPassword) {
+                setIsAuthenticated(true);
+            } else {
+                alert("口令错误，无法访问该应用。");
+            }
         } else {
-            alert("口令错误，无法访问该应用。");
+            setIsAuthenticated(true); // 如果没有设置口令，直接允许访问
         }
     }, []);
 

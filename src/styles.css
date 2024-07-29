@@ -52,7 +52,7 @@ h1 {
 
 .text-areas {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
     margin-bottom: 20px;
 }
 
@@ -70,13 +70,13 @@ textarea {
     resize: vertical;
     background-color: #fff;
     height: 400px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
 }
 
 .input-text-area,
 .output-text-area {
     width: 100%;
-    max-width: 550px; 
+    max-width: 500px; 
     position: relative;
 }
 
@@ -84,7 +84,7 @@ textarea {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #e9ecef; /* 灰色底 */
+    background-color: #e9ecef; 
     padding: 10px;
     border-radius: 4px;
     margin-top: 10px;
@@ -145,13 +145,13 @@ button:disabled {
 }
 
 .success {
-    background-color: #d4edda; /* 绿色背景 */
-    color: #155724; /* 深绿色字 */
+    background-color: #d4edda; 
+    color: #155724; /
 }
 
 .error {
-    background-color: #f8d7da; /* 红色背景 */
-    color: #721c24; /* 深红色字 */
+    background-color: #f8d7da; 
+    color: #721c24;
 }
 
 .footer {
