@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './styles.css';
 
 const sourceLanguages = [
@@ -83,21 +83,6 @@ const App = () => {
     const [message, setMessage] = useState('');
     const [isError, setIsError] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-    useEffect(() => {
-        const appPassword = process.env.PASSWORD;
-        if (appPassword) {
-            const userPassword = prompt("请输入访问口令：");
-            if (userPassword === appPassword) {
-                setIsAuthenticated(true);
-            } else {
-                alert("口令错误，无法访问该应用。");
-            }
-        } else {
-            setIsAuthenticated(true); // 如果没有设置口令，默认允许访问
-        }
-    }, []);
 
     const handleTranslate = async () => {
         setLoading(true);
@@ -106,7 +91,7 @@ const App = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${process.env.API_TOKEN}` // 添加 Authorization 头
+                    'Authorization': `Bearer ${process.env.API_TOKEN}`
                 },
                 body: JSON.stringify({
                     text: text,
@@ -131,7 +116,7 @@ const App = () => {
                 setMessage('');
             }, 2000);
         } catch (error) {
-            console.error('翻译请求错误:', error); // 输出错误信息
+            console.error('翻译请求错误:', error);
             setMessage('翻译请求出错，请检查网络连接。');
             setIsError(true);
             setTimeout(() => {
@@ -172,10 +157,6 @@ const App = () => {
         setSourceLang(targetLang);
         setTargetLang(sourceLang);
     };
-
-    if (!isAuthenticated) {
-        return null; // 如果未认证，返回 null，阻止渲染
-    }
 
     return (
         <div className="container">
