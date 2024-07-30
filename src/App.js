@@ -96,7 +96,7 @@ const App = () => {
                 alert("口令错误，无法访问该应用。");
             }
         } else {
-            setIsAuthenticated(true); // 如果没有设置口令，直接允许访问
+            setIsAuthenticated(true);
         }
     }, []);
 
@@ -173,7 +173,7 @@ const App = () => {
     };
 
     if (!isAuthenticated) {
-        return null; // 如果未认证，返回null，阻止渲染
+        return null;
     }
 
     return (

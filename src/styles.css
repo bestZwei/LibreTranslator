@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #fff9e6; 
+    background-color: #fff9e6;
 }
 
 .container {
@@ -52,7 +52,7 @@ h1 {
 
 .text-areas {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     margin-bottom: 20px;
 }
 
@@ -69,14 +69,14 @@ textarea {
     border: 1px solid #ddd;
     resize: vertical;
     background-color: #fff;
-    height: 400px; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    height: 400px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .input-text-area,
 .output-text-area {
     width: 100%;
-    max-width: 500px; 
+    max-width: 500px;
     position: relative;
 }
 
@@ -84,7 +84,7 @@ textarea {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #e9ecef; 
+    background-color: #e9ecef;
     padding: 10px;
     border-radius: 4px;
     margin-top: 10px;
@@ -99,15 +99,15 @@ textarea {
     font-size: 14px;
     padding: 5px 10px;
     border: none;
-    background-color: #000; 
-    color: #fff; 
+    background-color: #000;
+    color: #fff;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .copy-button:hover {
-    background-color: #333; 
+    background-color: #333;
 }
 
 .buttons {
@@ -133,7 +133,7 @@ button:hover {
 }
 
 button:disabled {
-    background-color: #ccc; /* 禁用状态 */
+    background-color: #ccc;
     cursor: not-allowed;
 }
 
@@ -145,13 +145,13 @@ button:disabled {
 }
 
 .success {
-    background-color: #d4edda; 
-    color: #155724; 
+    background-color: #d4edda;
+    color: #155724;
 }
 
 .error {
-    background-color: #f8d7da; 
-    color: #721c24; 
+    background-color: #f8d7da;
+    color: #721c24;
 }
 
 .footer {
