@@ -23,10 +23,11 @@ h1 {
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+    position: relative;
 }
 
 .language-selection select {
-    width: 200px; /* 增加宽度 */
+    width: 150px;
     padding: 5px;
     font-size: 16px;
     margin: 0 10px;
@@ -51,7 +52,8 @@ h1 {
 }
 
 .auto-translate {
-    margin-bottom: 20px;
+    position: absolute;
+    right: 0;
 }
 
 .auto-translate label {
@@ -85,7 +87,7 @@ textarea {
 .input-text-area,
 .output-text-area {
     width: 100%;
-    max-width: 600px; 
+    max-width: 500px;
     position: relative;
 }
 
@@ -113,7 +115,6 @@ textarea {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    writing-mode: horizontal-tb; /* 确保文字横向排列 */
 }
 
 .copy-button:hover {
