@@ -67,7 +67,7 @@ h1 {
 
 .text-areas div {
     margin: 0 10px;
-    width: 100%;
+    width: 100%; /* 修改为100% */
 }
 
 textarea {
@@ -78,7 +78,7 @@ textarea {
     border: 1px solid #ddd;
     resize: vertical;
     background-color: #fff;
-    height: 200px; /* 调整高度 */
+    height: 400px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -113,9 +113,6 @@ textarea {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .copy-button:hover {
