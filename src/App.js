@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './styles.css';
 
 const sourceLanguages = [
@@ -115,6 +115,7 @@ const App = () => {
                 setMessage('');
             }, 2000);
         } catch (error) {
+            console.error('翻译请求错误:', error);
             setMessage('翻译请求出错，请检查网络连接。');
             setIsError(true);
             setTimeout(() => {
