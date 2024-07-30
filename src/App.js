@@ -34,7 +34,6 @@ const sourceLanguages = [
     { code: 'ZH', name: '中文' }
 ];
 
-
 const targetLanguages = [
     { code: 'AR', name: '阿拉伯语' },
     { code: 'BG', name: '保加利亚语' },
@@ -239,7 +238,8 @@ const App = () => {
                         value={text}
                         onChange={handleTextChange}
                         placeholder="输入文本"
-                        rows="10"
+                        rows="8" // 调整高度
+                        style={{ width: '48%' }} // 调整宽度
                     />
                     <div className="info-bar">
                         <div className="char-count">字符数: {inputCharCount}</div>
@@ -251,7 +251,8 @@ const App = () => {
                         value={translatedText}
                         onChange={handleOutputChange}
                         placeholder="翻译结果"
-                        rows="10"
+                        rows="8" // 调整高度
+                        style={{ width: '48%' }} // 调整宽度
                     />
                     <div className="info-bar">
                         <div className="char-count">字符数: {outputCharCount}</div>
