@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.css';
 
 const sourceLanguages = [
@@ -90,7 +90,7 @@ const App = () => {
             const response = await fetch(`${process.env.DEEPLX_API_URL}/translate?token=${process.env.API_TOKEN}`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     text: text,
@@ -115,7 +115,6 @@ const App = () => {
                 setMessage('');
             }, 2000);
         } catch (error) {
-            console.error('翻译请求错误:', error);
             setMessage('翻译请求出错，请检查网络连接。');
             setIsError(true);
             setTimeout(() => {
