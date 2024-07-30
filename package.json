@@ -1,5 +1,5 @@
 {
-  "name": "pdeeplx",
+  "name": "libretranslator",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "export REACT_APP_NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   }

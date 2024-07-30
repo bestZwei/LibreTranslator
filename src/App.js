@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.css';
 
 const sourceLanguages = [
@@ -85,6 +85,12 @@ const App = () => {
     const [loading, setLoading] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');
+
+    useEffect(() => {
+        if (!process.env.REACT_APP_PASSWORD) {
+            setIsAuthenticated(true);
+        }
+    }, []);
 
     const handleTranslate = async () => {
         setLoading(true);
