@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import './styles.css';
@@ -77,7 +75,7 @@ const targetLanguages = [
 ];
 
 const App = () => {
-    const { t, i18n } = useTranslation(); // 使用i18n钩子来获取翻译函数和当前语言设置
+    const { t, i18n } = useTranslation();
     const [text, setText] = useState('');
     const [translatedText, setTranslatedText] = useState('');
     const [sourceLang, setSourceLang] = useState('ZH');
@@ -104,7 +102,6 @@ const App = () => {
     }, [text, sourceLang, targetLang, autoTranslate]);
 
     useEffect(() => {
-        // 检测用户系统语言并设置语言
         const userLang = navigator.language || navigator.userLanguage;
         if (['zh', 'de', 'en'].includes(userLang.split('-')[0])) {
             i18n.changeLanguage(userLang.split('-')[0]);
@@ -234,19 +231,6 @@ const App = () => {
                     <option value="zh">中文</option>
                     <option value="de">Deutsch</option>
                 </select>
-            </div>
-            <div className="language-selection">
-                <select value={sourceLang} onChange={(e) => setSourceLang(e.target.value)}>
-                    {sourceLanguages.map(lang => (
-                        <option key={lang.code} value={lang.code}>{lang.name}</option>
-                    ))}
-                </select>
-                <button onClick={handleSwapLanguages} className="swap-button">⇄</button>
-                <select value={targetLang} onChange={(e) => setTargetLang(e.target.value)}>
-                    {targetLanguages.map(lang => (
-                        <option key={lang.code} value={lang.code}>{lang.name}</option>
-                    ))}
-                </select>
                 <div className="auto-translate">
                     <label>
                         <input
@@ -257,6 +241,19 @@ const App = () => {
                         {t('autoTranslate')}
                     </label>
                 </div>
+            </div>
+            <div className="language-selection">
+                <select value={sourceLang} onChange={(e) => setSourceLang(e.target.value)}>
+                    {sourceLanguages.map(lang => (
+                        <option key={lang.code} value={lang.code}>{t(lang.name)}</option>
+                    ))}
+                </select>
+                <button onClick={handleSwapLanguages} className="swap-button">⇄</button>
+                <select value={targetLang} onChange={(e) => setTargetLang(e.target.value)}>
+                    {targetLanguages.map(lang => (
+                        <option key={lang.code} value={lang.code}>{t(lang.name)}</option>
+                    ))}
+                </select>
             </div>
             <div className="text-areas">
                 <div className="input-text-area">
