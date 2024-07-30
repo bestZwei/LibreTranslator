@@ -1,0 +1,19 @@
+{
+    "selectLanguage": "Sprache auswählen",
+    "inputPlaceholder": "Text eingeben",
+    "outputPlaceholder": "Übersetzungsergebnis",
+    "charCount": "Anzahl der Zeichen",
+    "copy": "Kopieren",
+    "copySuccess": "Kopiert!",
+    "copyFailed": "Kopieren fehlgeschlagen",
+    "translating": "Übersetzen...",
+    "translate": "Übersetzen",
+    "translationSuccess": "Übersetzung erfolgreich!",
+    "translationFailed": "Übersetzung fehlgeschlagen, bitte versuchen Sie es erneut.",
+    "translationError": "Übersetzungsanfragefehler, bitte überprüfen Sie Ihre Netzwerkverbindung.",
+    "wrongPassword": "Falsches Passwort, bitte erneut versuchen.",
+    "enterPassword": "Passwort eingeben",
+    "submit": "Einreichen",
+    "autoTranslate": "Automatische Übersetzung",
+    "poweredBy": "Angetrieben von DeepLx"
+  }

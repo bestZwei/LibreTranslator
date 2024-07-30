@@ -1,20 +1,20 @@
 body,
 html,
 * {
-    -webkit-user-select: none;  /* 禁止文本选择 */
+    -webkit-user-select: none;  
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    cursor: default;  /* 禁止光标闪动 */
+    cursor: default;  
 }
 
 .input-text-area textarea,
 .output-text-area textarea {
-    -webkit-user-select: text;  /* 允许文本选择 */
+    -webkit-user-select: text; 
     -moz-user-select: text;
     -ms-user-select: text;
     user-select: text;
-    cursor: text;  /* 允许光标闪动 */
+    cursor: text;  
 }
 
 body {
@@ -35,6 +35,18 @@ body {
 h1 {
     color: #333;
     margin-bottom: 20px;
+}
+
+.language-switcher {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.language-switcher label {
+    font-size: 16px;
+    margin-right: 10px;
 }
 
 .language-selection {

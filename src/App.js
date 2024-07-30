@@ -1,4 +1,7 @@
+
+
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import './styles.css';
 
 const sourceLanguages = [
@@ -74,6 +77,7 @@ const targetLanguages = [
 ];
 
 const App = () => {
+    const { t, i18n } = useTranslation(); // 使用i18n钩子来获取翻译函数和当前语言设置
     const [text, setText] = useState('');
     const [translatedText, setTranslatedText] = useState('');
     const [sourceLang, setSourceLang] = useState('ZH');
@@ -99,6 +103,16 @@ const App = () => {
         }
     }, [text, sourceLang, targetLang, autoTranslate]);
 
+    useEffect(() => {
+        // 检测用户系统语言并设置语言
+        const userLang = navigator.language || navigator.userLanguage;
+        if (['zh', 'de', 'en'].includes(userLang.split('-')[0])) {
+            i18n.changeLanguage(userLang.split('-')[0]);
+        } else {
+            i18n.changeLanguage('en');
+        }
+    }, [i18n]);
+
     const handleTranslate = async () => {
         setLoading(true);
         try {
@@ -119,10 +133,10 @@ const App = () => {
             if (data.code === 200) {
                 setTranslatedText(data.data);
                 setOutputCharCount(data.data.length);
-                setMessage('翻译成功！');
+                setMessage(t('translationSuccess'));
                 setIsError(false);
             } else {
-                setMessage('翻译失败，请重试。');
+                setMessage(t('translationFailed'));
                 setIsError(true);
             }
 
@@ -131,7 +145,7 @@ const App = () => {
             }, 2000);
         } catch (error) {
             console.error('翻译请求错误:', error);
-            setMessage('翻译请求出错，请检查网络连接。');
+            setMessage(t('translationError'));
             setIsError(true);
             setTimeout(() => {
                 setMessage('');
@@ -154,11 +168,11 @@ const App = () => {
     const handleCopy = (textToCopy) => {
         navigator.clipboard.writeText(textToCopy)
             .then(() => {
-                setMessage('结果已复制！');
+                setMessage(t('copySuccess'));
                 setIsError(false);
             })
             .catch(() => {
-                setMessage('复制失败，请重试。');
+                setMessage(t('copyFailed'));
                 setIsError(true);
             });
 
@@ -176,12 +190,16 @@ const App = () => {
         if (!process.env.REACT_APP_PASSWORD || password === process.env.REACT_APP_PASSWORD) {
             setIsAuthenticated(true);
         } else {
-            setMessage('口令错误，请重试。');
+            setMessage(t('wrongPassword'));
             setIsError(true);
             setTimeout(() => {
                 setMessage('');
             }, 2000);
         }
+    };
+
+    const changeLanguage = (event) => {
+        i18n.changeLanguage(event.target.value);
     };
 
     if (!isAuthenticated) {
@@ -193,9 +211,9 @@ const App = () => {
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholder="请输入访问口令"
+                        placeholder={t('enterPassword')}
                     />
-                    <button onClick={handlePasswordSubmit}>提交</button>
+                    <button onClick={handlePasswordSubmit}>{t('submit')}</button>
                 </div>
                 {message && (
                     <div className={`message ${isError ? 'error' : 'success'}`}>
@@ -209,6 +227,14 @@ const App = () => {
     return (
         <div className="container">
             <h1>LibreTranslator</h1>
+            <div className="language-switcher">
+                <label>{t('selectLanguage')}:</label>
+                <select onChange={changeLanguage}>
+                    <option value="en">English</option>
+                    <option value="zh">中文</option>
+                    <option value="de">Deutsch</option>
+                </select>
+            </div>
             <div className="language-selection">
                 <select value={sourceLang} onChange={(e) => setSourceLang(e.target.value)}>
                     {sourceLanguages.map(lang => (
@@ -228,7 +254,7 @@ const App = () => {
                             checked={autoTranslate}
                             onChange={(e) => setAutoTranslate(e.target.checked)}
                         />
-                        实时翻译
+                        {t('autoTranslate')}
                     </label>
                 </div>
             </div>
@@ -237,30 +263,30 @@ const App = () => {
                     <textarea
                         value={text}
                         onChange={handleTextChange}
-                        placeholder="输入文本"
+                        placeholder={t('inputPlaceholder')}
                         rows="10"
                     />
                     <div className="info-bar">
-                        <div className="char-count">字符数: {inputCharCount}</div>
-                        <button onClick={() => handleCopy(text)} className="copy-button">复制</button>
+                        <div className="char-count">{t('charCount')}: {inputCharCount}</div>
+                        <button onClick={() => handleCopy(text)} className="copy-button">{t('copy')}</button>
                     </div>
                 </div>
                 <div className="output-text-area">
                     <textarea
                         value={translatedText}
                         onChange={handleOutputChange}
-                        placeholder="翻译结果"
+                        placeholder={t('outputPlaceholder')}
                         rows="10"
                     />
                     <div className="info-bar">
-                        <div className="char-count">字符数: {outputCharCount}</div>
-                        <button onClick={() => handleCopy(translatedText)} className="copy-button">复制</button>
+                        <div className="char-count">{t('charCount')}: {outputCharCount}</div>
+                        <button onClick={() => handleCopy(translatedText)} className="copy-button">{t('copy')}</button>
                     </div>
                 </div>
             </div>
             <div className="buttons">
                 <button onClick={handleTranslate} disabled={loading}>
-                    {loading ? '翻译中...' : '翻译'}
+                    {loading ? t('translating') : t('translate')}
                 </button>
             </div>
             {message && (
@@ -270,10 +296,10 @@ const App = () => {
             )}
             <footer className="footer">
                 <a href="https://github.com/bestZwei/LibreTranslator" target="_blank" rel="noopener noreferrer">GitHub 仓库</a>
-                <span> | 基于DeepLx</span>
+                <span> | {t('poweredBy')}</span>
             </footer>
         </div>
     );
-}
+};
 
 export default App;

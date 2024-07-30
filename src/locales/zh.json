@@ -1,0 +1,19 @@
+{
+    "selectLanguage": "选择语言",
+    "inputPlaceholder": "输入文本",
+    "outputPlaceholder": "翻译结果",
+    "charCount": "字符数",
+    "copy": "复制",
+    "copySuccess": "已复制！",
+    "copyFailed": "复制失败",
+    "translating": "翻译中...",
+    "translate": "翻译",
+    "translationSuccess": "翻译成功！",
+    "translationFailed": "翻译失败，请重试。",
+    "translationError": "翻译请求出错，请检查网络连接。",
+    "wrongPassword": "口令错误，请重试。",
+    "enterPassword": "请输入访问口令",
+    "submit": "提交",
+    "autoTranslate": "实时翻译",
+    "poweredBy": "基于DeepLx"
+  }

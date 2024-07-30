@@ -1,0 +1,19 @@
+{
+    "selectLanguage": "Select Language",
+    "inputPlaceholder": "Enter text",
+    "outputPlaceholder": "Translation result",
+    "charCount": "Character count",
+    "copy": "Copy",
+    "copySuccess": "Copied!",
+    "copyFailed": "Copy failed",
+    "translating": "Translating...",
+    "translate": "Translate",
+    "translationSuccess": "Translation successful!",
+    "translationFailed": "Translation failed, please try again.",
+    "translationError": "Translation request error, please check your network connection.",
+    "wrongPassword": "Wrong password, please try again.",
+    "enterPassword": "Enter password",
+    "submit": "Submit",
+    "autoTranslate": "Auto Translate",
+    "poweredBy": "Powered by DeepLx"
+  }
