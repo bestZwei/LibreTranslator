@@ -85,19 +85,12 @@ const App = () => {
     const [loading, setLoading] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');
-    const [autoTranslate, setAutoTranslate] = useState(false);
 
     useEffect(() => {
         if (!process.env.REACT_APP_PASSWORD) {
             setIsAuthenticated(true);
         }
     }, []);
-
-    useEffect(() => {
-        if (autoTranslate && text) {
-            handleTranslate();
-        }
-    }, [text, autoTranslate]);
 
     const handleTranslate = async () => {
         setLoading(true);
@@ -222,28 +215,19 @@ const App = () => {
                     ))}
                 </select>
             </div>
-            <div className="auto-translate">
-                <label>
-                    <input
-                        type="checkbox"
-                        checked={autoTranslate}
-                        onChange={() => setAutoTranslate(!autoTranslate)}
-                    />
-                    实时翻译
-                </label>
-            </div>
             <div className="text-areas">
                 <div className="input-text-area">
                     <textarea
                         value={text}
                         onChange={handleTextChange}
                         placeholder="输入文本"
-                        rows="8" // 调整高度
-                        style={{ width: '48%' }} // 调整宽度
+                        rows="10"
                     />
                     <div className="info-bar">
                         <div className="char-count">字符数: {inputCharCount}</div>
-                        <button onClick={() => handleCopy(text)} className="copy-button">复制</button>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <button onClick={() => handleCopy(text)} className="copy-button">复制</button>
+                        </div>
                     </div>
                 </div>
                 <div className="output-text-area">
@@ -251,17 +235,18 @@ const App = () => {
                         value={translatedText}
                         onChange={handleOutputChange}
                         placeholder="翻译结果"
-                        rows="8" // 调整高度
-                        style={{ width: '48%' }} // 调整宽度
+                        rows="10"
                     />
                     <div className="info-bar">
                         <div className="char-count">字符数: {outputCharCount}</div>
-                        <button onClick={() => handleCopy(translatedText)} className="copy-button">复制</button>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <button onClick={() => handleCopy(translatedText)} className="copy-button">复制</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className="buttons">
-                <button onClick={handleTranslate} disabled={loading || autoTranslate}>
+            <div className="buttons" style={{ justifyContent: 'center' }}>
+                <button onClick={handleTranslate} disabled={loading}>
                     {loading ? '翻译中...' : '翻译'}
                 </button>
             </div>
