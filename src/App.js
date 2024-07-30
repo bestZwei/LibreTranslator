@@ -84,10 +84,10 @@ const App = () => {
     const [isError, setIsError] = useState(false);
     const [loading, setLoading] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [password, setPassword] = useState('');
 
     useEffect(() => {
         const appPassword = process.env.PASSWORD;
-
         if (appPassword) {
             const userPassword = prompt("请输入访问口令：");
             if (userPassword === appPassword) {
@@ -96,14 +96,14 @@ const App = () => {
                 alert("口令错误，无法访问该应用。");
             }
         } else {
-            setIsAuthenticated(true);
+            setIsAuthenticated(true); // 如果没有设置口令，默认允许访问
         }
     }, []);
 
     const handleTranslate = async () => {
         setLoading(true);
         try {
-            const response = await fetch(`${process.env.DEEPLX_API_URL}/translate?token=${process.env.API_TOKEN}`, {
+            const response = await fetch(`${process.env.DEEPLX_API_URL}/translate`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -111,7 +111,8 @@ const App = () => {
                 body: JSON.stringify({
                     text: text,
                     source_lang: sourceLang,
-                    target_lang: targetLang
+                    target_lang: targetLang,
+                    token: process.env.API_TOKEN // 将 token 放在请求体中
                 })
             });
 
@@ -173,7 +174,7 @@ const App = () => {
     };
 
     if (!isAuthenticated) {
-        return null;
+        return null; // 如果未认证，返回 null，阻止渲染
     }
 
     return (

@@ -1,4 +1,3 @@
-
 # LibreTranslator
 
 LibreTranslator 是一个基于 React 的翻译工具，利用 DeepLx API 提供快速和准确的翻译服务。用户可以选择源语言和目标语言，输入文本并获取翻译结果。
@@ -6,7 +5,7 @@ LibreTranslator 是一个基于 React 的翻译工具，利用 DeepLx API 提供
 ### 功能
 
 - 支持多种语言的翻译
-- 友好的用户界面（待完善）
+- 友好的用户界面
 
 ### 技术栈
 
@@ -15,21 +14,16 @@ LibreTranslator 是一个基于 React 的翻译工具，利用 DeepLx API 提供
 - **API**: DeepLx API
 
 ### 项目结构
-
 ```
 /
 ├── /public
-│   ├── index.html
-│   └── styles.css
+│ ├── index.html
 ├── /src
-│   ├── App.js
-│   ├── index.js
-│   └── styles.css
+│ ├── App.js
+│ ├── index.js
+│ └── styles.css
 └── package.json
 ```
-
-
-
 ### 部署
 
 #### 1、使用 Cloudflare Pages 部署
@@ -54,19 +48,21 @@ LibreTranslator 是一个基于 React 的翻译工具，利用 DeepLx API 提供
 
 #### 所有部署方式都要配置环境变量
 
-1. **REACT_APP_DEEPLX_API_URL**: `https://api.deeplx.org/token*`  不带 `/translate`
+1. **DEEPLX_API_URL**: `https://api.deeplx.org/xxx`  不带 `/translate`
 
    用于存储 DeepLx API 的 URL，以便在请求翻译时使用。
 
-2. **REACT_APP_PASSWORD（可选）**: 访问密码
+2. **PASSWORD（可选）**: 访问密码
 
    用于存储访问口令，以便在用户输入口令时进行验证。
 
 3. **NODE_OPTIONS**:`--openssl-legacy-provider`   
 
    这个变量用于配置 Node.js 的选项，通常用于解决某些依赖包的兼容性问题。
+   
+4. **API_TOKEN**：随便填，自建的服务可以按需修改
 
-###### https://api.deeplx.org/token* 可以从 https://api.deeplx.org/ 获取
+###### https://api.deeplx.org/xxx 可以从 https://api.deeplx.org/ 获取
 
 ---
 
