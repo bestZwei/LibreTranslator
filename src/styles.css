@@ -58,7 +58,7 @@ h1 {
 
 .text-areas div {
     margin: 0 10px;
-    width: 100%; 
+    width: 100%;
 }
 
 textarea {
@@ -69,7 +69,7 @@ textarea {
     border: 1px solid #ddd;
     resize: vertical;
     background-color: #fff;
-    height: 400px;
+    height: 400px; 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
 }
 
@@ -151,7 +151,7 @@ button:disabled {
 
 .error {
     background-color: #f8d7da; 
-    color: #721c24;
+    color: #721c24; 
 }
 
 .footer {

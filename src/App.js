@@ -84,10 +84,9 @@ const App = () => {
     const [isError, setIsError] = useState(false);
     const [loading, setLoading] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [password, setPassword] = useState('');
 
     useEffect(() => {
-        const appPassword = process.env.REACT_APP_PASSWORD;
+        const appPassword = process.env.PASSWORD;
 
         if (appPassword) {
             const userPassword = prompt("请输入访问口令：");
@@ -104,7 +103,7 @@ const App = () => {
     const handleTranslate = async () => {
         setLoading(true);
         try {
-            const response = await fetch(`${process.env.REACT_APP_DEEPLX_API_URL}/translate?token=${process.env.REACT_APP_PASSWORD}`, {
+            const response = await fetch(`${process.env.DEEPLX_API_URL}/translate?token=${process.env.API_TOKEN}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
