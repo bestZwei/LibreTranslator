@@ -26,7 +26,7 @@ h1 {
 }
 
 .language-selection select {
-    width: 150px;
+    width: 200px; /* 增加宽度 */
     padding: 5px;
     font-size: 16px;
     margin: 0 10px;
@@ -48,6 +48,15 @@ h1 {
 
 .swap-button:hover {
     background-color: #0056b3;
+}
+
+.auto-translate {
+    margin-bottom: 20px;
+}
+
+.auto-translate label {
+    font-size: 16px;
+    color: #333;
 }
 
 .text-areas {
@@ -76,7 +85,7 @@ textarea {
 .input-text-area,
 .output-text-area {
     width: 100%;
-    max-width: 500px;
+    max-width: 600px; /* 增加宽度 */
     position: relative;
 }
 
