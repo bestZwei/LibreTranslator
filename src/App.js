@@ -85,12 +85,19 @@ const App = () => {
     const [loading, setLoading] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');
+    const [autoTranslate, setAutoTranslate] = useState(false);
 
     useEffect(() => {
         if (!process.env.REACT_APP_PASSWORD) {
             setIsAuthenticated(true);
         }
     }, []);
+
+    useEffect(() => {
+        if (autoTranslate && text) {
+            handleTranslate();
+        }
+    }, [text, autoTranslate]);
 
     const handleTranslate = async () => {
         setLoading(true);
@@ -215,6 +222,16 @@ const App = () => {
                     ))}
                 </select>
             </div>
+            <div className="auto-translate">
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={autoTranslate}
+                        onChange={() => setAutoTranslate(!autoTranslate)}
+                    />
+                    实时翻译
+                </label>
+            </div>
             <div className="text-areas">
                 <div className="input-text-area">
                     <textarea
@@ -242,7 +259,7 @@ const App = () => {
                 </div>
             </div>
             <div className="buttons">
-                <button onClick={handleTranslate} disabled={loading}>
+                <button onClick={handleTranslate} disabled={loading || autoTranslate}>
                     {loading ? '翻译中...' : '翻译'}
                 </button>
             </div>
