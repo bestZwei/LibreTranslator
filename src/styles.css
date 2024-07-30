@@ -106,7 +106,7 @@ textarea {
     transition: background-color 0.3s ease;
 }
 
-copy-button:hover {
+.copy-button:hover {
     background-color: #333;
 }
 
