@@ -85,6 +85,7 @@ const App = () => {
     const [loading, setLoading] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');
+    const [autoTranslate, setAutoTranslate] = useState(false); // 新增状态
 
     useEffect(() => {
         if (!process.env.REACT_APP_PASSWORD) {
@@ -92,7 +93,14 @@ const App = () => {
         }
     }, []);
 
+    useEffect(() => {
+        if (autoTranslate) {
+            handleTranslate();
+        }
+    }, [text, autoTranslate]); // 监听文本变化
+
     const handleTranslate = async () => {
+        if (!text) return; // 如果文本为空，则不进行翻译
         setLoading(true);
         try {
             const response = await fetch(`${process.env.REACT_APP_DEEPLX_API_URL}/translate?token=${process.env.REACT_APP_API_TOKEN}`, {
@@ -225,9 +233,7 @@ const App = () => {
                     />
                     <div className="info-bar">
                         <div className="char-count">字符数: {inputCharCount}</div>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <button onClick={() => handleCopy(text)} className="copy-button">复制</button>
-                        </div>
+                        <button onClick={() => handleCopy(text)} className="copy-button">复制</button>
                     </div>
                 </div>
                 <div className="output-text-area">
@@ -239,13 +245,19 @@ const App = () => {
                     />
                     <div className="info-bar">
                         <div className="char-count">字符数: {outputCharCount}</div>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <button onClick={() => handleCopy(translatedText)} className="copy-button">复制</button>
-                        </div>
+                        <button onClick={() => handleCopy(translatedText)} className="copy-button">复制</button>
                     </div>
                 </div>
             </div>
-            <div className="buttons" style={{ justifyContent: 'center' }}>
+            <div className="buttons">
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={autoTranslate}
+                        onChange={() => setAutoTranslate(!autoTranslate)}
+                    />
+                    实时翻译
+                </label>
                 <button onClick={handleTranslate} disabled={loading}>
                     {loading ? '翻译中...' : '翻译'}
                 </button>
