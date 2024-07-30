@@ -26,7 +26,7 @@ h1 {
 }
 
 .language-selection select {
-    width: 150px;
+    width: 200px; /* 增加宽度 */
     padding: 5px;
     font-size: 16px;
     margin: 0 10px;
@@ -67,7 +67,7 @@ h1 {
 
 .text-areas div {
     margin: 0 10px;
-    width: 100%; /* 修改为100% */
+    width: 100%;
 }
 
 textarea {
@@ -85,7 +85,7 @@ textarea {
 .input-text-area,
 .output-text-area {
     width: 100%;
-    max-width: 500px;
+    max-width: 600px; 
     position: relative;
 }
 
@@ -113,6 +113,7 @@ textarea {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    writing-mode: horizontal-tb; /* 确保文字横向排列 */
 }
 
 .copy-button:hover {
