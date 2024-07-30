@@ -131,6 +131,7 @@ const App = () => {
                 setMessage('');
             }, 2000);
         } catch (error) {
+            console.error('翻译请求错误:', error); // 输出错误信息
             setMessage('翻译请求出错，请检查网络连接。');
             setIsError(true);
             setTimeout(() => {
