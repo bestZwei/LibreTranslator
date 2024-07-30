@@ -37,11 +37,16 @@ h1 {
     margin-bottom: 20px;
 }
 
-.language-switcher {
+.language-auto-translate {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+}
+
+.language-switcher {
+    display: flex;
+    align-items: center;
 }
 
 .language-switcher label {
@@ -50,7 +55,8 @@ h1 {
 }
 
 .auto-translate {
-    margin-left: 20px; /* 添加左边距以增加间距 */
+    display: flex;
+    align-items: center;
 }
 
 .language-selection {

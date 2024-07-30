@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import './styles.css';
@@ -73,6 +75,7 @@ const targetLanguages = [
     { code: 'ZH-HANS', name: '中文（简体）' },
     { code: 'ZH-HANT', name: '中文（繁体）' }
 ];
+
 
 const App = () => {
     const { t, i18n } = useTranslation();
@@ -224,13 +227,15 @@ const App = () => {
     return (
         <div className="container">
             <h1>LibreTranslator</h1>
-            <div className="language-switcher">
-                <label>{t('selectLanguage')}:</label>
-                <select onChange={changeLanguage}>
-                    <option value="en">English</option>
-                    <option value="zh">中文</option>
-                    <option value="de">Deutsch</option>
-                </select>
+            <div className="language-auto-translate">
+                <div className="language-switcher">
+                    <label>{t('selectLanguage')}:</label>
+                    <select onChange={changeLanguage}>
+                        <option value="en">English</option>
+                        <option value="zh">中文</option>
+                        <option value="de">Deutsch</option>
+                    </select>
+                </div>
                 <div className="auto-translate">
                     <label>
                         <input
@@ -245,13 +250,13 @@ const App = () => {
             <div className="language-selection">
                 <select value={sourceLang} onChange={(e) => setSourceLang(e.target.value)}>
                     {sourceLanguages.map(lang => (
-                        <option key={lang.code} value={lang.code}>{t(lang.name)}</option>
+                        <option key={lang.code} value={lang.code}>{lang.name}</option>
                     ))}
                 </select>
                 <button onClick={handleSwapLanguages} className="swap-button">⇄</button>
                 <select value={targetLang} onChange={(e) => setTargetLang(e.target.value)}>
                     {targetLanguages.map(lang => (
-                        <option key={lang.code} value={lang.code}>{t(lang.name)}</option>
+                        <option key={lang.code} value={lang.code}>{lang.name}</option>
                     ))}
                 </select>
             </div>
