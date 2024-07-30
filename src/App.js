@@ -83,6 +83,8 @@ const App = () => {
     const [message, setMessage] = useState('');
     const [isError, setIsError] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [password, setPassword] = useState('');
 
     const handleTranslate = async () => {
         setLoading(true);
@@ -156,6 +158,40 @@ const App = () => {
         setSourceLang(targetLang);
         setTargetLang(sourceLang);
     };
+
+    const handlePasswordSubmit = () => {
+        if (!process.env.REACT_APP_PASSWORD || password === process.env.REACT_APP_PASSWORD) {
+            setIsAuthenticated(true);
+        } else {
+            setMessage('口令错误，请重试。');
+            setIsError(true);
+            setTimeout(() => {
+                setMessage('');
+            }, 2000);
+        }
+    };
+
+    if (!isAuthenticated) {
+        return (
+            <div className="container">
+                <h1>LibreTranslator</h1>
+                <div className="password-container">
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="请输入访问口令"
+                    />
+                    <button onClick={handlePasswordSubmit}>提交</button>
+                </div>
+                {message && (
+                    <div className={`message ${isError ? 'error' : 'success'}`}>
+                        {message}
+                    </div>
+                )}
+            </div>
+        );
+    }
 
     return (
         <div className="container">
