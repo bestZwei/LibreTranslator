@@ -84,7 +84,6 @@ const App = () => {
     const [isError, setIsError] = useState(false);
     const [loading, setLoading] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [password, setPassword] = useState('');
 
     useEffect(() => {
         const appPassword = process.env.PASSWORD;
@@ -103,16 +102,16 @@ const App = () => {
     const handleTranslate = async () => {
         setLoading(true);
         try {
-            const response = await fetch(`${process.env.DEEPLX_API_URL}/translate`, {
+            const response = await fetch(`${process.env.DEEPLX_API_URL}/translate?token=${process.env.API_TOKEN}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${process.env.API_TOKEN}` // 添加 Authorization 头
                 },
                 body: JSON.stringify({
                     text: text,
                     source_lang: sourceLang,
-                    target_lang: targetLang,
-                    token: process.env.API_TOKEN // 将 token 放在请求体中
+                    target_lang: targetLang
                 })
             });
 
