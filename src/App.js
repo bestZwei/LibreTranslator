@@ -90,8 +90,7 @@ const App = () => {
             const response = await fetch(`${process.env.DEEPLX_API_URL}/translate?token=${process.env.API_TOKEN}`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${process.env.API_TOKEN}`
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     text: text,
