@@ -85,7 +85,7 @@ const App = () => {
     const [loading, setLoading] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');
-    const [autoTranslate, setAutoTranslate] = useState(false); // 新增状态
+    const [autoTranslate, setAutoTranslate] = useState(false);
 
     useEffect(() => {
         if (!process.env.REACT_APP_PASSWORD) {
@@ -94,13 +94,12 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-        if (autoTranslate) {
+        if (autoTranslate && text) {
             handleTranslate();
         }
-    }, [text, autoTranslate]); // 监听文本变化
+    }, [text, sourceLang, targetLang, autoTranslate]);
 
     const handleTranslate = async () => {
-        if (!text) return; // 如果文本为空，则不进行翻译
         setLoading(true);
         try {
             const response = await fetch(`${process.env.REACT_APP_DEEPLX_API_URL}/translate?token=${process.env.REACT_APP_API_TOKEN}`, {
@@ -222,6 +221,16 @@ const App = () => {
                         <option key={lang.code} value={lang.code}>{lang.name}</option>
                     ))}
                 </select>
+                <div className="auto-translate">
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={autoTranslate}
+                            onChange={(e) => setAutoTranslate(e.target.checked)}
+                        />
+                        实时翻译
+                    </label>
+                </div>
             </div>
             <div className="text-areas">
                 <div className="input-text-area">
@@ -250,14 +259,6 @@ const App = () => {
                 </div>
             </div>
             <div className="buttons">
-                <label>
-                    <input
-                        type="checkbox"
-                        checked={autoTranslate}
-                        onChange={() => setAutoTranslate(!autoTranslate)}
-                    />
-                    实时翻译
-                </label>
                 <button onClick={handleTranslate} disabled={loading}>
                     {loading ? '翻译中...' : '翻译'}
                 </button>

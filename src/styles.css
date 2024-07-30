@@ -1,3 +1,22 @@
+body,
+html,
+* {
+    -webkit-user-select: none;  /* 禁止文本选择 */
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;  /* 禁止光标闪动 */
+}
+
+.input-text-area textarea,
+.output-text-area textarea {
+    -webkit-user-select: text;  /* 允许文本选择 */
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+    cursor: text;  /* 允许光标闪动 */
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -23,10 +42,11 @@ h1 {
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+    position: relative;
 }
 
 .language-selection select {
-    width: 200px; /* 增加宽度 */
+    width: 150px;
     padding: 5px;
     font-size: 16px;
     margin: 0 10px;
@@ -51,7 +71,8 @@ h1 {
 }
 
 .auto-translate {
-    margin-bottom: 20px;
+    position: absolute;
+    right: 0;
 }
 
 .auto-translate label {
@@ -85,7 +106,7 @@ textarea {
 .input-text-area,
 .output-text-area {
     width: 100%;
-    max-width: 600px; /* 增加宽度 */
+    max-width: 500px;
     position: relative;
 }
 
