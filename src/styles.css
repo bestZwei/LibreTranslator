@@ -26,7 +26,7 @@ body {
 }
 
 .container {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     text-align: center;
@@ -104,8 +104,7 @@ h1 {
 }
 
 textarea {
-    width: 600px;
-    width: 400px;
+    width: 100%;
     padding: 10px;
     font-size: 16px;
     border-radius: 4px;
@@ -119,7 +118,7 @@ textarea {
 .input-text-area,
 .output-text-area {
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
     position: relative;
 }
 
