@@ -61,7 +61,7 @@ const targetLanguages = [
     { code: 'PL', name: '波兰语' },
     { code: 'PT', name: '葡萄牙语' },
     { code: 'PT-BR', name: '葡萄牙语（巴西）' },
-    { code: 'PT-PT', name: '葡萄牙语（葡萄牙）' },
+    { code: 'PT-PT', name: '葡萄牙语（除巴西）' },
     { code: 'RO', name: '罗马尼亚语' },
     { code: 'RU', name: '俄语' },
     { code: 'SK', name: '斯洛伐克语' },
@@ -221,7 +221,6 @@ const App = () => {
         );
     }
 
-
     return (
         <div className="container">
             <h1>LibreTranslator</h1>
@@ -247,17 +246,17 @@ const App = () => {
             </div>
             <div className="language-selection">
                 <select value={sourceLang} onChange={(e) => setSourceLang(e.target.value)}>
-                    {Object.keys(t('sourceLanguages')).map(langCode => (
-                        <option key={langCode} value={langCode}>
-                            {t(`sourceLanguages.${langCode}`)}
+                    {sourceLanguages.map(lang => (
+                        <option key={lang.code} value={lang.code}>
+                            {t(`sourceLanguages.${lang.code}`)}
                         </option>
                     ))}
                 </select>
                 <button onClick={handleSwapLanguages} className="swap-button">⇄</button>
                 <select value={targetLang} onChange={(e) => setTargetLang(e.target.value)}>
-                    {Object.keys(t('targetLanguages')).map(langCode => (
-                        <option key={langCode} value={langCode}>
-                            {t(`targetLanguages.${langCode}`)}
+                    {targetLanguages.map(lang => (
+                        <option key={lang.code} value={lang.code}>
+                            {t(`targetLanguages.${lang.code}`)}
                         </option>
                     ))}
                 </select>
