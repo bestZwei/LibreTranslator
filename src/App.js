@@ -61,7 +61,7 @@ const targetLanguages = [
     { code: 'PL', name: '波兰语' },
     { code: 'PT', name: '葡萄牙语' },
     { code: 'PT-BR', name: '葡萄牙语（巴西）' },
-    { code: 'PT-PT', name: '葡萄牙语（除巴西）' },
+    { code: 'PT-PT', name: '葡萄牙语（葡萄牙）' },
     { code: 'RO', name: '罗马尼亚语' },
     { code: 'RU', name: '俄语' },
     { code: 'SK', name: '斯洛伐克语' },
@@ -221,6 +221,7 @@ const App = () => {
         );
     }
 
+
     return (
         <div className="container">
             <h1>LibreTranslator</h1>
@@ -303,6 +304,6 @@ const App = () => {
             </footer>
         </div>
     );
-}
+};
 
 export default App;
