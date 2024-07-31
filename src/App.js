@@ -2,6 +2,78 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import './styles.css';
 
+const sourceLanguages = [
+    { code: 'AR', name: '阿拉伯语' },
+    { code: 'BG', name: '保加利亚语' },
+    { code: 'CS', name: '捷克语' },
+    { code: 'DA', name: '丹麦语' },
+    { code: 'DE', name: '德语' },
+    { code: 'EL', name: '希腊语' },
+    { code: 'EN', name: '英语' },
+    { code: 'ES', name: '西班牙语' },
+    { code: 'ET', name: '爱沙尼亚语' },
+    { code: 'FI', name: '芬兰语' },
+    { code: 'FR', name: '法语' },
+    { code: 'HU', name: '匈牙利语' },
+    { code: 'ID', name: '印尼语' },
+    { code: 'IT', name: '意大利语' },
+    { code: 'JA', name: '日语' },
+    { code: 'KO', name: '韩语' },
+    { code: 'LT', name: '立陶宛语' },
+    { code: 'LV', name: '拉脱维亚语' },
+    { code: 'NB', name: '挪威语' },
+    { code: 'NL', name: '荷兰语' },
+    { code: 'PL', name: '波兰语' },
+    { code: 'PT', name: '葡萄牙语' },
+    { code: 'RO', name: '罗马尼亚语' },
+    { code: 'RU', name: '俄语' },
+    { code: 'SK', name: '斯洛伐克语' },
+    { code: 'SL', name: '斯洛文尼亚语' },
+    { code: 'SV', name: '瑞典语' },
+    { code: 'TR', name: '土耳其语' },
+    { code: 'UK', name: '乌克兰语' },
+    { code: 'ZH', name: '中文' }
+];
+
+const targetLanguages = [
+    { code: 'AR', name: '阿拉伯语' },
+    { code: 'BG', name: '保加利亚语' },
+    { code: 'CS', name: '捷克语' },
+    { code: 'DA', name: '丹麦语' },
+    { code: 'DE', name: '德语' },
+    { code: 'EL', name: '希腊语' },
+    { code: 'EN', name: '英语' },
+    { code: 'EN-GB', name: '英语（英式）' },
+    { code: 'EN-US', name: '英语（美式）' },
+    { code: 'ES', name: '西班牙语' },
+    { code: 'ET', name: '爱沙尼亚语' },
+    { code: 'FI', name: '芬兰语' },
+    { code: 'FR', name: '法语' },
+    { code: 'HU', name: '匈牙利语' },
+    { code: 'ID', name: '印尼语' },
+    { code: 'IT', name: '意大利语' },
+    { code: 'JA', name: '日语' },
+    { code: 'KO', name: '韩语' },
+    { code: 'LT', name: '立陶宛语' },
+    { code: 'LV', name: '拉脱维亚语' },
+    { code: 'NB', name: '挪威语' },
+    { code: 'NL', name: '荷兰语' },
+    { code: 'PL', name: '波兰语' },
+    { code: 'PT', name: '葡萄牙语' },
+    { code: 'PT-BR', name: '葡萄牙语（巴西）' },
+    { code: 'PT-PT', name: '葡萄牙语（除巴西）' },
+    { code: 'RO', name: '罗马尼亚语' },
+    { code: 'RU', name: '俄语' },
+    { code: 'SK', name: '斯洛伐克语' },
+    { code: 'SL', name: '斯洛文尼亚语' },
+    { code: 'SV', name: '瑞典语' },
+    { code: 'TR', name: '土耳其语' },
+    { code: 'UK', name: '乌克兰语' },
+    { code: 'ZH', name: '中文' },
+    { code: 'ZH-HANS', name: '中文（简体）' },
+    { code: 'ZH-HANT', name: '中文（繁体）' }
+];
+
 const App = () => {
     const { t, i18n } = useTranslation();
     const [text, setText] = useState('');
