@@ -149,8 +149,9 @@ textarea {
     color: #fff;
     border-radius: 4px;
     cursor: pointer;
-    width: auto; 
-    display: inline-block;
+    display: inline-flex; /* 使用 inline-flex 确保内容水平排列 */
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
     transition: background-color 0.3s ease;
 }
 
