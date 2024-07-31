@@ -37,6 +37,28 @@ h1 {
     margin-bottom: 20px;
 }
 
+.language-auto-translate {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.language-switcher {
+    display: flex;
+    align-items: center;
+}
+
+.language-switcher label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.auto-translate {
+    display: flex;
+    align-items: center;
+}
+
 .language-selection {
     display: flex;
     justify-content: center;
@@ -68,16 +90,6 @@ h1 {
 
 .swap-button:hover {
     background-color: #0056b3;
-}
-
-.auto-translate {
-    position: absolute;
-    right: 0;
-}
-
-.auto-translate label {
-    font-size: 16px;
-    color: #333;
 }
 
 .text-areas {
