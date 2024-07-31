@@ -1,6 +1,4 @@
-body,
-html,
-* {
+body, html, * {
     -webkit-user-select: none;  
     -moz-user-select: none;
     -ms-user-select: none;
@@ -101,6 +99,7 @@ h1 {
 .text-areas div {
     margin: 0 10px;
     width: 100%;
+    position: relative;
 }
 
 textarea {
@@ -130,10 +129,10 @@ textarea {
     background-color: #e9ecef;
     padding: 10px;
     border-radius: 4px;
-    margin-top: 10px;
     width: 50%;
-    margin-left: auto;
-    margin-right: auto;
+    position: absolute;
+    bottom: -50px; 
+    left: 25%; 
 }
 
 .char-count {
