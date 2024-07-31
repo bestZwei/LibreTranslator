@@ -127,6 +127,7 @@ textarea {
     justify-content: space-between;
     align-items: center;
     background-color: #e9ecef;
+    width: 90%;
     padding: 10px;
     border-radius: 4px;
     margin-top: 10px;
@@ -141,7 +142,7 @@ textarea {
     font-size: 14px;
     padding: 5px 10px;
     border: none;
-    background-color: #000;
+    background-color: #2b2b2b;
     color: #fff;
     border-radius: 4px;
     cursor: pointer;
