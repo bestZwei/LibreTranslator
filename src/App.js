@@ -1,79 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import './styles.css';
 
-const sourceLanguages = [
-    { code: 'AR', name: '阿拉伯语' },
-    { code: 'BG', name: '保加利亚语' },
-    { code: 'CS', name: '捷克语' },
-    { code: 'DA', name: '丹麦语' },
-    { code: 'DE', name: '德语' },
-    { code: 'EL', name: '希腊语' },
-    { code: 'EN', name: '英语' },
-    { code: 'ES', name: '西班牙语' },
-    { code: 'ET', name: '爱沙尼亚语' },
-    { code: 'FI', name: '芬兰语' },
-    { code: 'FR', name: '法语' },
-    { code: 'HU', name: '匈牙利语' },
-    { code: 'ID', name: '印尼语' },
-    { code: 'IT', name: '意大利语' },
-    { code: 'JA', name: '日语' },
-    { code: 'KO', name: '韩语' },
-    { code: 'LT', name: '立陶宛语' },
-    { code: 'LV', name: '拉脱维亚语' },
-    { code: 'NB', name: '挪威语' },
-    { code: 'NL', name: '荷兰语' },
-    { code: 'PL', name: '波兰语' },
-    { code: 'PT', name: '葡萄牙语' },
-    { code: 'RO', name: '罗马尼亚语' },
-    { code: 'RU', name: '俄语' },
-    { code: 'SK', name: '斯洛伐克语' },
-    { code: 'SL', name: '斯洛文尼亚语' },
-    { code: 'SV', name: '瑞典语' },
-    { code: 'TR', name: '土耳其语' },
-    { code: 'UK', name: '乌克兰语' },
-    { code: 'ZH', name: '中文' }
-];
+const sourceLanguages = ['AR', 'BG', 'CS', 'DA', 'DE', 'EL', 'EN', 'ES', 'ET', 'FI', 'FR', 'HU', 'ID', 'IT', 'JA', 'KO', 'LT', 'LV', 'NB', 'NL', 'PL', 'PT', 'RO', 'RU', 'SK', 'SL', 'SV', 'TR', 'UK', 'ZH'];
 
-const targetLanguages = [
-    { code: 'AR', name: '阿拉伯语' },
-    { code: 'BG', name: '保加利亚语' },
-    { code: 'CS', name: '捷克语' },
-    { code: 'DA', name: '丹麦语' },
-    { code: 'DE', name: '德语' },
-    { code: 'EL', name: '希腊语' },
-    { code: 'EN', name: '英语' },
-    { code: 'EN-GB', name: '英语（英式）' },
-    { code: 'EN-US', name: '英语（美式）' },
-    { code: 'ES', name: '西班牙语' },
-    { code: 'ET', name: '爱沙尼亚语' },
-    { code: 'FI', name: '芬兰语' },
-    { code: 'FR', name: '法语' },
-    { code: 'HU', name: '匈牙利语' },
-    { code: 'ID', name: '印尼语' },
-    { code: 'IT', name: '意大利语' },
-    { code: 'JA', name: '日语' },
-    { code: 'KO', name: '韩语' },
-    { code: 'LT', name: '立陶宛语' },
-    { code: 'LV', name: '拉脱维亚语' },
-    { code: 'NB', name: '挪威语' },
-    { code: 'NL', name: '荷兰语' },
-    { code: 'PL', name: '波兰语' },
-    { code: 'PT', name: '葡萄牙语' },
-    { code: 'PT-BR', name: '葡萄牙语（巴西）' },
-    { code: 'PT-PT', name: '葡萄牙语（除巴西）' },
-    { code: 'RO', name: '罗马尼亚语' },
-    { code: 'RU', name: '俄语' },
-    { code: 'SK', name: '斯洛伐克语' },
-    { code: 'SL', name: '斯洛文尼亚语' },
-    { code: 'SV', name: '瑞典语' },
-    { code: 'TR', name: '土耳其语' },
-    { code: 'UK', name: '乌克兰语' },
-    { code: 'ZH', name: '中文' },
-    { code: 'ZH-HANS', name: '中文（简体）' },
-    { code: 'ZH-HANT', name: '中文（繁体）' }
-];
+const targetLanguages = ['AR', 'BG', 'CS', 'DA', 'DE', 'EL', 'EN', 'EN-GB', 'EN-US', 'ES', 'ET', 'FI', 'FR', 'HU', 'ID', 'IT', 'JA', 'KO', 'LT', 'LV', 'NB', 'NL', 'PL', 'PT', 'PT-BR', 'PT-PT', 'RO', 'RU', 'SK', 'SL', 'SV', 'TR', 'UK', 'ZH', 'ZH-HANS', 'ZH-HANT'];
 
 const App = () => {
+    const { t, i18n } = useTranslation();
     const [text, setText] = useState('');
     const [translatedText, setTranslatedText] = useState('');
     const [sourceLang, setSourceLang] = useState('ZH');
@@ -99,6 +33,15 @@ const App = () => {
         }
     }, [text, sourceLang, targetLang, autoTranslate]);
 
+    useEffect(() => {
+        const userLang = navigator.language || navigator.userLanguage;
+        if (['zh', 'de', 'en'].includes(userLang.split('-')[0])) {
+            i18n.changeLanguage(userLang.split('-')[0]);
+        } else {
+            i18n.changeLanguage('en');
+        }
+    }, [i18n]);
+
     const handleTranslate = async () => {
         setLoading(true);
         try {
@@ -119,10 +62,10 @@ const App = () => {
             if (data.code === 200) {
                 setTranslatedText(data.data);
                 setOutputCharCount(data.data.length);
-                setMessage('翻译成功！');
+                setMessage(t('translationSuccess'));
                 setIsError(false);
             } else {
-                setMessage('翻译失败，请重试。');
+                setMessage(t('translationFailed'));
                 setIsError(true);
             }
 
@@ -131,7 +74,7 @@ const App = () => {
             }, 2000);
         } catch (error) {
             console.error('翻译请求错误:', error);
-            setMessage('翻译请求出错，请检查网络连接。');
+            setMessage(t('translationError'));
             setIsError(true);
             setTimeout(() => {
                 setMessage('');
@@ -154,11 +97,11 @@ const App = () => {
     const handleCopy = (textToCopy) => {
         navigator.clipboard.writeText(textToCopy)
             .then(() => {
-                setMessage('结果已复制！');
+                setMessage(t('copySuccess'));
                 setIsError(false);
             })
             .catch(() => {
-                setMessage('复制失败，请重试。');
+                setMessage(t('copyFailed'));
                 setIsError(true);
             });
 
@@ -176,12 +119,16 @@ const App = () => {
         if (!process.env.REACT_APP_PASSWORD || password === process.env.REACT_APP_PASSWORD) {
             setIsAuthenticated(true);
         } else {
-            setMessage('口令错误，请重试。');
+            setMessage(t('wrongPassword'));
             setIsError(true);
             setTimeout(() => {
                 setMessage('');
             }, 2000);
         }
+    };
+
+    const changeLanguage = (event) => {
+        i18n.changeLanguage(event.target.value);
     };
 
     if (!isAuthenticated) {
@@ -193,9 +140,9 @@ const App = () => {
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholder="请输入访问口令"
+                        placeholder={t('enterPassword')}
                     />
-                    <button onClick={handlePasswordSubmit}>提交</button>
+                    <button onClick={handlePasswordSubmit}>{t('submit')}</button>
                 </div>
                 {message && (
                     <div className={`message ${isError ? 'error' : 'success'}`}>
@@ -209,18 +156,15 @@ const App = () => {
     return (
         <div className="container">
             <h1>LibreTranslator</h1>
-            <div className="language-selection">
-                <select value={sourceLang} onChange={(e) => setSourceLang(e.target.value)}>
-                    {sourceLanguages.map(lang => (
-                        <option key={lang.code} value={lang.code}>{lang.name}</option>
-                    ))}
-                </select>
-                <button onClick={handleSwapLanguages} className="swap-button">⇄</button>
-                <select value={targetLang} onChange={(e) => setTargetLang(e.target.value)}>
-                    {targetLanguages.map(lang => (
-                        <option key={lang.code} value={lang.code}>{lang.name}</option>
-                    ))}
-                </select>
+            <div className="language-auto-translate">
+                <div className="language-switcher">
+                    <label>Lang:</label>
+                    <select onChange={changeLanguage}>
+                        <option value="en">English</option>
+                        <option value="zh">中文</option>
+                        <option value="de">Deutsch</option>
+                    </select>
+                </div>
                 <div className="auto-translate">
                     <label>
                         <input
@@ -228,39 +172,56 @@ const App = () => {
                             checked={autoTranslate}
                             onChange={(e) => setAutoTranslate(e.target.checked)}
                         />
-                        实时翻译
+                        {t('autoTranslate')}
                     </label>
                 </div>
+            </div>
+            <div className="language-selection">
+                <select value={sourceLang} onChange={(e) => setSourceLang(e.target.value)}>
+                    {sourceLanguages.map(langCode => (
+                        <option key={langCode} value={langCode}>
+                            {t(`sourceLanguages.${langCode}`)}
+                        </option>
+                    ))}
+                </select>
+                <button onClick={handleSwapLanguages} className="swap-button">⇄</button>
+                <select value={targetLang} onChange={(e) => setTargetLang(e.target.value)}>
+                    {targetLanguages.map(langCode => (
+                        <option key={langCode} value={langCode}>
+                            {t(`targetLanguages.${langCode}`)}
+                        </option>
+                    ))}
+                </select>
             </div>
             <div className="text-areas">
                 <div className="input-text-area">
                     <textarea
                         value={text}
                         onChange={handleTextChange}
-                        placeholder="输入文本"
+                        placeholder={t('inputPlaceholder')}
                         rows="10"
                     />
                     <div className="info-bar">
-                        <div className="char-count">字符数: {inputCharCount}</div>
-                        <button onClick={() => handleCopy(text)} className="copy-button">复制</button>
+                        <div className="char-count">{t('charCount')}: {inputCharCount}</div>
+                        <button onClick={() => handleCopy(text)} className="copy-button">{t('copy')}</button>
                     </div>
                 </div>
                 <div className="output-text-area">
                     <textarea
                         value={translatedText}
                         onChange={handleOutputChange}
-                        placeholder="翻译结果"
+                        placeholder={t('outputPlaceholder')}
                         rows="10"
                     />
                     <div className="info-bar">
-                        <div className="char-count">字符数: {outputCharCount}</div>
-                        <button onClick={() => handleCopy(translatedText)} className="copy-button">复制</button>
+                        <div className="char-count">{t('charCount')}: {outputCharCount}</div>
+                        <button onClick={() => handleCopy(translatedText)} className="copy-button">{t('copy')}</button>
                     </div>
                 </div>
             </div>
             <div className="buttons">
                 <button onClick={handleTranslate} disabled={loading}>
-                    {loading ? '翻译中...' : '翻译'}
+                    {loading ? t('translating') : t('translate')}
                 </button>
             </div>
             {message && (
@@ -270,10 +231,10 @@ const App = () => {
             )}
             <footer className="footer">
                 <a href="https://github.com/bestZwei/LibreTranslator" target="_blank" rel="noopener noreferrer">GitHub 仓库</a>
-                <span> | 基于DeepLx</span>
+                <span> | {t('poweredBy')}</span>
             </footer>
         </div>
     );
-}
+};
 
 export default App;
