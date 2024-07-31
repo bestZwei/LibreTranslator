@@ -124,18 +124,19 @@ textarea {
 }
 
 .info-bar {
+    width: 50%; /* 设置宽度为父容器宽度的一半 */
+    position: absolute; /* 绝对定位 */
+    left: 50%; /* 左边距设置为 50% */
+    transform: translateX(-50%); /* 水平居中 */
+    bottom: -40px; /* 根据需要调整距离 textarea 底部的距离 */
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #e9ecef;
     padding: 10px;
     border-radius: 4px;
-    margin-top: 10px;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
+    margin-top: 10px; /* 可去掉 */
 }
-
 .char-count {
     font-size: 14px;
     color: #888;
