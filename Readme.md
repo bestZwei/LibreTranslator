@@ -53,7 +53,6 @@ LibreTranslator 是一个基于 React 的翻译工具，利用 DeepLx API 提供
 
 4. **REACT_APP_API_TOKEN（可选）**：按需修改，如果你是**自建的DeepLx服务**，参考请求链接是 `REACT_APP_DEEPLX_API_URL/translate?token=REACT_APP_API_TOKEN`，填写这两个环境变量。
 
-   常用的请求格式
 
 ---
 
