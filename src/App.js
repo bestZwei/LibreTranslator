@@ -187,7 +187,7 @@ const App = () => {
                 <select value={sourceLang} onChange={(e) => setSourceLang(e.target.value)}>
                     {sourceLanguages.map(langCode => (
                         <option key={langCode} value={langCode}>
-                            {langCode === 'AUTO' ? t('autoDetect') : t(`sourceLanguages.${langCode}`)}
+                            {langCode === 'AUTO' ? t('Auto') : t(`sourceLanguages.${langCode}`)}
                         </option>
                     ))}
                 </select>
