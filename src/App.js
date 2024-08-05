@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import './styles.css';
 
-const sourceLanguages = ['AR', 'BG', 'CS', 'DA', 'DE', 'EL', 'EN', 'ES', 'ET', 'FI', 'FR', 'HU', 'ID', 'IT', 'JA', 'KO', 'LT', 'LV', 'NB', 'NL', 'PL', 'PT', 'RO', 'RU', 'SK', 'SL', 'SV', 'TR', 'UK', 'ZH'];
+const sourceLanguages = ['AUTO', 'AR', 'BG', 'CS', 'DA', 'DE', 'EL', 'EN', 'ES', 'ET', 'FI', 'FR', 'HU', 'ID', 'IT', 'JA', 'KO', 'LT', 'LV', 'NB', 'NL', 'PL', 'PT', 'RO', 'RU', 'SK', 'SL', 'SV', 'TR', 'UK', 'ZH'];
 
 const targetLanguages = ['AR', 'BG', 'CS', 'DA', 'DE', 'EL', 'EN', 'EN-GB', 'EN-US', 'ES', 'ET', 'FI', 'FR', 'HU', 'ID', 'IT', 'JA', 'KO', 'LT', 'LV', 'NB', 'NL', 'PL', 'PT', 'PT-BR', 'PT-PT', 'RO', 'RU', 'SK', 'SL', 'SV', 'TR', 'UK', 'ZH', 'ZH-HANS', 'ZH-HANT'];
 
@@ -10,7 +10,7 @@ const App = () => {
     const { t, i18n } = useTranslation();
     const [text, setText] = useState('');
     const [translatedText, setTranslatedText] = useState('');
-    const [sourceLang, setSourceLang] = useState('ZH');
+    const [sourceLang, setSourceLang] = useState('AUTO');
     const [targetLang, setTargetLang] = useState('EN');
     const [inputCharCount, setInputCharCount] = useState(0);
     const [outputCharCount, setOutputCharCount] = useState(0);
@@ -45,16 +45,21 @@ const App = () => {
     const handleTranslate = async () => {
         setLoading(true);
         try {
+            const body = {
+                text: text,
+                target_lang: targetLang
+            };
+            
+            if (sourceLang !== 'AUTO') {
+                body.source_lang = sourceLang;
+            }
+
             const response = await fetch(`${process.env.REACT_APP_DEEPLX_API_URL}/translate?token=${process.env.REACT_APP_API_TOKEN}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    text: text,
-                    source_lang: sourceLang,
-                    target_lang: targetLang
-                })
+                body: JSON.stringify(body)
             });
 
             const data = await response.json();
@@ -111,8 +116,10 @@ const App = () => {
     };
 
     const handleSwapLanguages = () => {
-        setSourceLang(targetLang);
-        setTargetLang(sourceLang);
+        if (sourceLang !== 'AUTO' && targetLang !== 'AUTO') {
+            setSourceLang(targetLang);
+            setTargetLang(sourceLang);
+        }
     };
 
     const handlePasswordSubmit = () => {
@@ -180,7 +187,7 @@ const App = () => {
                 <select value={sourceLang} onChange={(e) => setSourceLang(e.target.value)}>
                     {sourceLanguages.map(langCode => (
                         <option key={langCode} value={langCode}>
-                            {t(`sourceLanguages.${langCode}`)}
+                            {langCode === 'AUTO' ? t('autoDetect') : t(`sourceLanguages.${langCode}`)}
                         </option>
                     ))}
                 </select>
@@ -230,7 +237,7 @@ const App = () => {
                 </div>
             )}
             <footer className="footer">
-                <a href="https://github.com/bestZwei/LibreTranslator" target="_blank" rel="noopener noreferrer">GitHub 仓库</a>
+                <a href="https://github.com/bestZwei/LibreTranslator" target="_blank" rel="noopener noreferrer">GitHub</a>
                 <span> | {t('poweredBy')}</span>
             </footer>
         </div>

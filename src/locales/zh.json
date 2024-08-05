@@ -17,6 +17,7 @@
   "autoTranslate": "实时翻译",
   "poweredBy": "基于DeepLx",
   "sourceLanguages": {
+    "autoDetect": "自动检测",
     "AR": "阿拉伯语",
     "BG": "保加利亚语",
     "CS": "捷克语",
