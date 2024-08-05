@@ -17,7 +17,7 @@
   "autoTranslate": "Auto Translate",
   "poweredBy": "Powered by DeepLx",
   "sourceLanguages": {
-    "autoDetect": "Auto Detect",
+    "AUTO": "Auto Detect",
     "AR": "Arabic",
     "BG": "Bulgarian",
     "CS": "Czech",
