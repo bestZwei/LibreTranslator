@@ -103,9 +103,10 @@ h1 {
     flex-wrap: wrap;
 }
 
-.text-areas div {
-    margin: 10px;
-    width: calc(50% - 20px); /* 保持两个输入框并排且不重叠 */
+.text-area-container {
+    width: 100%;
+    max-width: 550px;
+    margin: 0 10px;
 }
 
 textarea {
@@ -120,11 +121,6 @@ textarea {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.input-text-area,
-.output-text-area {
-    position: relative;
-}
-
 .info-bar {
     display: flex;
     justify-content: space-between;
@@ -133,7 +129,6 @@ textarea {
     padding: 10px;
     border-radius: 4px;
     margin-top: 10px;
-    width: 100%; /* 保持与输入框宽度一致 */
 }
 
 .char-count {
@@ -251,22 +246,5 @@ button:disabled {
 @media (max-width: 768px) {
     .text-areas {
         flex-direction: column;
-    }
-
-    .info-bar {
-        width: 100%;
-    }
-
-    .language-selection {
-        flex-direction: column;
-    }
-
-    .language-auto-translate {
-        flex-direction: column;
-    }
-
-    .text-areas div {
-        width: 100%;
-        margin: 10px 0;
     }
 }
