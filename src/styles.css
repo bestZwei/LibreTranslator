@@ -104,9 +104,9 @@ h1 {
 }
 
 .text-areas div {
-    margin: 10px 5px;
+    margin: 10px 2px;
     width: 100%;
-    max-width: 550px;
+    max-width: 546px;
 }
 
 textarea {
