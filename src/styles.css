@@ -26,7 +26,7 @@ body {
 }
 
 .container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     text-align: center;
@@ -104,9 +104,9 @@ h1 {
 }
 
 .text-areas div {
-    margin: 10px 2px;
+    margin: 10px 10px;
     width: 100%;
-    max-width: 546px;
+    max-width: 550px;
 }
 
 textarea {
