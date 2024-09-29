@@ -22,7 +22,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #f4f4f9;
+    background-color: #f0f4f8; /* 更现代的背景色 */
 }
 
 .container {
@@ -30,9 +30,6 @@ body {
     margin: 0 auto;
     padding: 20px;
     text-align: center;
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
 }
 
 h1 {
@@ -88,11 +85,12 @@ h1 {
     color: #fff;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s;
 }
 
 .swap-button:hover {
     background-color: #0056b3;
+    transform: scale(1.1); /* 添加动画效果 */
 }
 
 .text-areas {
@@ -152,11 +150,12 @@ textarea {
     color: #fff;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s;
 }
 
 .copy-button:hover {
     background-color: #333;
+    transform: scale(1.1); /* 添加动画效果 */
 }
 
 .buttons {
@@ -174,11 +173,12 @@ button {
     color: #fff;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s;
 }
 
 button:hover {
     background-color: #218838;
+    transform: scale(1.1); /* 添加动画效果 */
 }
 
 button:disabled {
@@ -240,9 +240,10 @@ button:disabled {
     color: #fff;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s;
 }
 
 .password-container button:hover {
     background-color: #0056b3;
+    transform: scale(1.1); /* 添加动画效果 */
 }

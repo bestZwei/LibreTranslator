@@ -19,7 +19,7 @@ const App = () => {
     const [loading, setLoading] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');
-    const [autoTranslate, setAutoTranslate] = useState(false);
+    const [autoTranslate, setAutoTranslate] = useState(true); // 默认勾选
 
     useEffect(() => {
         if (!process.env.REACT_APP_PASSWORD) {
