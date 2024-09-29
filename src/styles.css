@@ -22,7 +22,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #fff9e6; 
+    background-color: #fff9e6;
 }
 
 .container {
@@ -42,6 +42,7 @@ h1 {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .language-switcher {
@@ -65,13 +66,14 @@ h1 {
     align-items: center;
     margin-bottom: 20px;
     position: relative;
+    flex-wrap: wrap;
 }
 
 .language-selection select {
     width: 150px;
     padding: 5px;
     font-size: 16px;
-    margin: 0 10px;
+    margin: 5px;
     border-radius: 4px;
     border: 1px solid #ddd;
     background-color: #fff;
@@ -86,21 +88,23 @@ h1 {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s;
+    margin: 5px;
 }
 
 .swap-button:hover {
     background-color: #0056b3;
-    transform: scale(1.1); 
+    transform: scale(1.1);
 }
 
 .text-areas {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .text-areas div {
-    margin: 0 10px;
+    margin: 10px 0;
     width: 100%;
 }
 
@@ -132,7 +136,7 @@ textarea {
     padding: 10px;
     border-radius: 4px;
     margin-top: 10px;
-    width: 50%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -155,7 +159,7 @@ textarea {
 
 .copy-button:hover {
     background-color: #333;
-    transform: scale(1.1); 
+    transform: scale(1.1);
 }
 
 .buttons {
@@ -245,5 +249,24 @@ button:disabled {
 
 .password-container button:hover {
     background-color: #0056b3;
-    transform: scale(1.1); 
+    transform: scale(1.1);
+}
+
+/* Media Queries for Mobile Devices */
+@media (max-width: 768px) {
+    .text-areas {
+        flex-direction: column;
+    }
+
+    .info-bar {
+        width: 100%;
+    }
+
+    .language-selection {
+        flex-direction: column;
+    }
+
+    .language-auto-translate {
+        flex-direction: column;
+    }
 }
