@@ -104,8 +104,8 @@ h1 {
 }
 
 .text-areas div {
-    margin: 10px 0;
-    width: 100%;
+    margin: 10px;
+    width: calc(50% - 20px); /* 确保输入框不会重叠 */
 }
 
 textarea {
@@ -118,13 +118,10 @@ textarea {
     background-color: #fff;
     height: 375px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    max-width: 550px;
 }
 
 .input-text-area,
 .output-text-area {
-    width: 100%;
-    max-width: 550px;
     position: relative;
 }
 
@@ -268,5 +265,9 @@ button:disabled {
 
     .language-auto-translate {
         flex-direction: column;
+    }
+
+    .text-areas div {
+        width: 100%;
     }
 }
