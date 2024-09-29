@@ -22,7 +22,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #f0f4f8; /* 更现代的背景色 */
+    background-color: #fff9e6; 
 }
 
 .container {
@@ -90,7 +90,7 @@ h1 {
 
 .swap-button:hover {
     background-color: #0056b3;
-    transform: scale(1.1); /* 添加动画效果 */
+    transform: scale(1.1); 
 }
 
 .text-areas {
@@ -155,7 +155,7 @@ textarea {
 
 .copy-button:hover {
     background-color: #333;
-    transform: scale(1.1); /* 添加动画效果 */
+    transform: scale(1.1); 
 }
 
 .buttons {
@@ -178,7 +178,7 @@ button {
 
 button:hover {
     background-color: #218838;
-    transform: scale(1.1); /* 添加动画效果 */
+    transform: scale(1.1);
 }
 
 button:disabled {
@@ -245,5 +245,5 @@ button:disabled {
 
 .password-container button:hover {
     background-color: #0056b3;
-    transform: scale(1.1); /* 添加动画效果 */
+    transform: scale(1.1); 
 }
