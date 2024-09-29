@@ -22,7 +22,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #fff9e6;
+    background-color: #f4f4f9;
 }
 
 .container {
@@ -30,6 +30,9 @@ body {
     margin: 0 auto;
     padding: 20px;
     text-align: center;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 h1 {
