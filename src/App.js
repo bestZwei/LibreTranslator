@@ -27,39 +27,9 @@ const App = () => {
         }
     }, []);
 
-    const debouncedTranslate = useCallback(
-        (() => {
-            let timer;
-            return (text, sourceLang, targetLang) => {
-                if (timer) {
-                    clearTimeout(timer);
-                }
-                timer = setTimeout(() => {
-                    if (text && autoTranslate) {
-                        handleTranslate();
-                    }
-                }, 1000); // 1秒延迟
-            };
-        })(),
-        [autoTranslate] // 依赖autoTranslate状态
-    );
-
-    useEffect(() => {
-        if (autoTranslate && text) {
-            debouncedTranslate(text, sourceLang, targetLang);
-        }
-    }, [text, sourceLang, targetLang, autoTranslate, debouncedTranslate]);
-
-    useEffect(() => {
-        const userLang = navigator.language || navigator.userLanguage;
-        if (['zh', 'de', 'en'].includes(userLang.split('-')[0])) {
-            i18n.changeLanguage(userLang.split('-')[0]);
-        } else {
-            i18n.changeLanguage('en');
-        }
-    }, [i18n]);
-
     const handleTranslate = async () => {
+        if (!text.trim()) return;
+        
         setLoading(true);
         try {
             const body = {
@@ -105,6 +75,38 @@ const App = () => {
             setLoading(false);
         }
     };
+
+    const debouncedTranslate = useCallback(
+        (() => {
+            let timer;
+            return () => {
+                if (timer) {
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(() => {
+                    if (text.trim() && autoTranslate && !loading) {
+                        handleTranslate();
+                    }
+                }, 1000);
+            };
+        })(),
+        [text, autoTranslate, loading]
+    );
+
+    useEffect(() => {
+        if (autoTranslate && text.trim()) {
+            debouncedTranslate();
+        }
+    }, [text, sourceLang, targetLang, autoTranslate, debouncedTranslate]);
+
+    useEffect(() => {
+        const userLang = navigator.language || navigator.userLanguage;
+        if (['zh', 'de', 'en'].includes(userLang.split('-')[0])) {
+            i18n.changeLanguage(userLang.split('-')[0]);
+        } else {
+            i18n.changeLanguage('en');
+        }
+    }, [i18n]);
 
     const handleTextChange = (e) => {
         const newText = e.target.value;
