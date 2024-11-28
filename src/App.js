@@ -81,6 +81,10 @@ const App = () => {
         setText(newText);
         setInputCharCount(newText.length);
 
+        if (e.nativeEvent.isComposing || e.nativeEvent.inputType === 'insertCompositionText') {
+            return;
+        }
+
         if (autoTranslate && newText.trim() && !loading) {
             if (window.translateTimer) {
                 clearTimeout(window.translateTimer);
@@ -88,6 +92,20 @@ const App = () => {
             window.translateTimer = setTimeout(() => {
                 handleTranslate();
             }, 1000);
+        }
+    };
+
+    const handleComposition = (e) => {
+        if (e.type === 'compositionend') {
+            const newText = e.target.value;
+            if (autoTranslate && newText.trim() && !loading) {
+                if (window.translateTimer) {
+                    clearTimeout(window.translateTimer);
+                }
+                window.translateTimer = setTimeout(() => {
+                    handleTranslate();
+                }, 1000);
+            }
         }
     };
 
@@ -219,6 +237,8 @@ const App = () => {
                     <textarea
                         value={text}
                         onChange={handleTextChange}
+                        onCompositionStart={handleComposition}
+                        onCompositionEnd={handleComposition}
                         placeholder={t('inputPlaceholder')}
                         rows="10"
                     />
