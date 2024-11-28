@@ -76,6 +76,17 @@ const App = () => {
         }
     };
 
+    const startTranslateTimer = useCallback((newText) => {
+        if (autoTranslate && newText.trim() && !loading) {
+            if (window.translateTimer) {
+                clearTimeout(window.translateTimer);
+            }
+            window.translateTimer = setTimeout(() => {
+                handleTranslate();
+            }, 1000);
+        }
+    }, [autoTranslate, loading, handleTranslate]);
+
     const handleTextChange = (e) => {
         const newText = e.target.value;
         setText(newText);
@@ -85,28 +96,21 @@ const App = () => {
             return;
         }
 
-        if (autoTranslate && newText.trim() && !loading) {
-            if (window.translateTimer) {
-                clearTimeout(window.translateTimer);
-            }
-            window.translateTimer = setTimeout(() => {
-                handleTranslate();
-            }, 1000);
-        }
+        startTranslateTimer(newText);
     };
 
     const handleComposition = (e) => {
         if (e.type === 'compositionend') {
             const newText = e.target.value;
-            if (autoTranslate && newText.trim() && !loading) {
-                if (window.translateTimer) {
-                    clearTimeout(window.translateTimer);
-                }
-                window.translateTimer = setTimeout(() => {
-                    handleTranslate();
-                }, 1000);
-            }
+            startTranslateTimer(newText);
         }
+    };
+
+    const handlePaste = (e) => {
+        const newText = e.clipboardData.getData('text');
+        setText(newText);
+        setInputCharCount(newText.length);
+        startTranslateTimer(newText);
     };
 
     useEffect(() => {
@@ -239,6 +243,7 @@ const App = () => {
                         onChange={handleTextChange}
                         onCompositionStart={handleComposition}
                         onCompositionEnd={handleComposition}
+                        onPaste={handlePaste}
                         placeholder={t('inputPlaceholder')}
                         rows="10"
                     />
