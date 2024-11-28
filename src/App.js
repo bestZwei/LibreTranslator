@@ -76,28 +76,28 @@ const App = () => {
         }
     };
 
-    const debouncedTranslate = useCallback(
-        (() => {
-            let timer;
-            return () => {
-                if (timer) {
-                    clearTimeout(timer);
-                }
-                timer = setTimeout(() => {
-                    if (text.trim() && autoTranslate && !loading) {
-                        handleTranslate();
-                    }
-                }, 1000);
-            };
-        })(),
-        [text, autoTranslate, loading]
-    );
+    const handleTextChange = (e) => {
+        const newText = e.target.value;
+        setText(newText);
+        setInputCharCount(newText.length);
+
+        if (autoTranslate && newText.trim() && !loading) {
+            if (window.translateTimer) {
+                clearTimeout(window.translateTimer);
+            }
+            window.translateTimer = setTimeout(() => {
+                handleTranslate();
+            }, 1000);
+        }
+    };
 
     useEffect(() => {
-        if (autoTranslate && text.trim()) {
-            debouncedTranslate();
-        }
-    }, [text, sourceLang, targetLang, autoTranslate, debouncedTranslate]);
+        return () => {
+            if (window.translateTimer) {
+                clearTimeout(window.translateTimer);
+            }
+        };
+    }, []);
 
     useEffect(() => {
         const userLang = navigator.language || navigator.userLanguage;
@@ -107,12 +107,6 @@ const App = () => {
             i18n.changeLanguage('en');
         }
     }, [i18n]);
-
-    const handleTextChange = (e) => {
-        const newText = e.target.value;
-        setText(newText);
-        setInputCharCount(newText.length);
-    };
 
     const handleOutputChange = (e) => {
         setTranslatedText(e.target.value);
