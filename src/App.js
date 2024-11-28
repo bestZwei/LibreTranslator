@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import './styles.css';
 
@@ -27,11 +27,28 @@ const App = () => {
         }
     }, []);
 
+    const debouncedTranslate = useCallback(
+        (() => {
+            let timer;
+            return (text, sourceLang, targetLang) => {
+                if (timer) {
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(() => {
+                    if (text && autoTranslate) {
+                        handleTranslate();
+                    }
+                }, 1000); // 1秒延迟
+            };
+        })(),
+        [autoTranslate] // 依赖autoTranslate状态
+    );
+
     useEffect(() => {
         if (autoTranslate && text) {
-            handleTranslate();
+            debouncedTranslate(text, sourceLang, targetLang);
         }
-    }, [text, sourceLang, targetLang, autoTranslate]);
+    }, [text, sourceLang, targetLang, autoTranslate, debouncedTranslate]);
 
     useEffect(() => {
         const userLang = navigator.language || navigator.userLanguage;
@@ -90,8 +107,9 @@ const App = () => {
     };
 
     const handleTextChange = (e) => {
-        setText(e.target.value);
-        setInputCharCount(e.target.value.length);
+        const newText = e.target.value;
+        setText(newText);
+        setInputCharCount(newText.length);
     };
 
     const handleOutputChange = (e) => {
