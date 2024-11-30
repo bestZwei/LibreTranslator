@@ -92,15 +92,11 @@ const App = () => {
         setText(newText);
         setInputCharCount(newText.length);
 
-        if (e.nativeEvent.isComposing || e.nativeEvent.inputType === 'insertCompositionText') {
-            return;
+        if (!e.nativeEvent.isComposing && 
+            e.nativeEvent.inputType !== 'insertCompositionText' && 
+            e.nativeEvent.inputType !== 'insertFromPaste') {
+            startTranslateTimer(newText);
         }
-
-        if (e.nativeEvent.inputType === 'insertFromPaste') {
-            return;
-        }
-
-        startTranslateTimer(newText);
     };
 
     const handleComposition = (e) => {
@@ -111,8 +107,7 @@ const App = () => {
     };
 
     const handlePaste = (e) => {
-        e.preventDefault();
-        const newText = e.clipboardData.getData('text');
+        const newText = e.target.value;
         setText(newText);
         setInputCharCount(newText.length);
         startTranslateTimer(newText);
