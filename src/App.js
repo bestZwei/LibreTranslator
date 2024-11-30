@@ -96,6 +96,10 @@ const App = () => {
             return;
         }
 
+        if (e.nativeEvent.inputType === 'insertFromPaste') {
+            return;
+        }
+
         startTranslateTimer(newText);
     };
 
@@ -107,6 +111,7 @@ const App = () => {
     };
 
     const handlePaste = (e) => {
+        e.preventDefault();
         const newText = e.clipboardData.getData('text');
         setText(newText);
         setInputCharCount(newText.length);
