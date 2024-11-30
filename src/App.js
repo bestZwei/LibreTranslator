@@ -93,8 +93,7 @@ const App = () => {
         setInputCharCount(newText.length);
 
         if (!e.nativeEvent.isComposing && 
-            e.nativeEvent.inputType !== 'insertCompositionText' && 
-            e.nativeEvent.inputType !== 'insertFromPaste') {
+            e.nativeEvent.inputType !== 'insertCompositionText') {
             startTranslateTimer(newText);
         }
     };
