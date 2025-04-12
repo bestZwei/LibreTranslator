@@ -1,6 +1,6 @@
 {
   "selectLanguage": "选择语言",
-  "inputPlaceholder": "输入文本",
+  "inputPlaceholder": "输入要翻译的文本",
   "outputPlaceholder": "翻译结果",
   "charCount": "字符数",
   "copy": "复制",
@@ -16,6 +16,13 @@
   "submit": "提交",
   "autoTranslate": "实时翻译",
   "poweredBy": "基于DeepLx",
+  "swapLanguages": "交换语言",
+  "speak": "朗读",
+  "clearText": "清除文本",
+  "history": "历史记录",
+  "noHistory": "暂无翻译历史记录",
+  "clearHistory": "清除历史记录",
+  "clearHistoryConfirm": "确定要清除所有翻译历史记录吗？",
   "sourceLanguages": {
     "AUTO": "自动检测",
     "AR": "阿拉伯语",

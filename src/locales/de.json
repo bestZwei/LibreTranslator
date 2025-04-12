@@ -1,6 +1,6 @@
 {
   "selectLanguage": "Sprache auswählen",
-  "inputPlaceholder": "Text eingeben",
+  "inputPlaceholder": "Text zum Übersetzen eingeben",
   "outputPlaceholder": "Übersetzungsergebnis",
   "charCount": "Anzahl der Zeichen",
   "copy": "Kopieren",
@@ -16,6 +16,13 @@
   "submit": "Einreichen",
   "autoTranslate": "Automatische Übersetzung",
   "poweredBy": "Angetrieben von DeepLx",
+  "swapLanguages": "Sprachen tauschen",
+  "speak": "Anhören",
+  "clearText": "Text löschen",
+  "history": "Verlauf",
+  "noHistory": "Noch keine Übersetzungshistorie",
+  "clearHistory": "Verlauf löschen",
+  "clearHistoryConfirm": "Sind Sie sicher, dass Sie Ihren Übersetzungsverlauf löschen möchten?",
   "sourceLanguages": {
     "AUTO": "Automatisch erkennen",
     "AR": "Arabisch",

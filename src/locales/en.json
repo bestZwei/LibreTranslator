@@ -1,6 +1,6 @@
 {
   "selectLanguage": "Select Language",
-  "inputPlaceholder": "Enter text",
+  "inputPlaceholder": "Enter text to translate",
   "outputPlaceholder": "Translation result",
   "charCount": "Character count",
   "copy": "Copy",
@@ -16,6 +16,13 @@
   "submit": "Submit",
   "autoTranslate": "Auto Translate",
   "poweredBy": "Powered by DeepLx",
+  "swapLanguages": "Swap languages",
+  "speak": "Listen",
+  "clearText": "Clear text",
+  "history": "History",
+  "noHistory": "No translation history yet",
+  "clearHistory": "Clear history",
+  "clearHistoryConfirm": "Are you sure you want to clear your translation history?",
   "sourceLanguages": {
     "AUTO": "Auto Detect",
     "AR": "Arabic",
