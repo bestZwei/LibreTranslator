@@ -211,11 +211,32 @@ const App = () => {
     }, [typingTimeout]);
 
     useEffect(() => {
-        const userLang = navigator.language || navigator.userLanguage;
-        if (['zh', 'de', 'en'].includes(userLang.split('-')[0])) {
-            i18n.changeLanguage(userLang.split('-')[0]);
+        // 首先尝试从localStorage获取用户之前选择的语言
+        const savedLanguage = localStorage.getItem('uiLanguage');
+        
+        if (savedLanguage && ['zh', 'de', 'en'].includes(savedLanguage)) {
+            i18n.changeLanguage(savedLanguage);
         } else {
-            i18n.changeLanguage('en');
+            // 如果没有保存的语言，则从浏览器设置中检测
+            const userLang = navigator.language || navigator.userLanguage;
+            let detectedLang = 'en'; // 默认为英语
+            
+            // 处理常见的中文变体
+            if (userLang.startsWith('zh')) {
+                detectedLang = 'zh';
+            } 
+            // 处理常见的德语变体
+            else if (userLang.startsWith('de')) {
+                detectedLang = 'de';
+            }
+            // 处理常见的英语变体
+            else if (userLang.startsWith('en')) {
+                detectedLang = 'en';
+            }
+            
+            i18n.changeLanguage(detectedLang);
+            // 保存检测到的语言
+            localStorage.setItem('uiLanguage', detectedLang);
         }
     }, [i18n]);
 
@@ -285,7 +306,9 @@ const App = () => {
     };
 
     const changeLanguage = (event) => {
-        i18n.changeLanguage(event.target.value);
+        const newLang = event.target.value;
+        i18n.changeLanguage(newLang);
+        localStorage.setItem('uiLanguage', newLang);
     };
     
     const loadFromHistory = (item) => {
