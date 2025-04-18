@@ -152,7 +152,7 @@ const App = () => {
         setText(newText);
         setInputCharCount(newText.length);
 
-        // Don't start translation if we're in the middle of IME composition
+        // 仅在非输入法编辑模式下触发翻译
         if (!isComposing && autoTranslate) {
             startTranslateTimer(newText);
         }
@@ -162,9 +162,21 @@ const App = () => {
         if (e.type === 'compositionstart') {
             setIsComposing(true);
         } else if (e.type === 'compositionend') {
-            setIsComposing(false);
-            // Only start translation when composition ends
-            startTranslateTimer(e.target.value);
+            // 一些浏览器在compositionend事件触发时，e.target.value可能还没有更新
+            // 使用setTimeout确保我们获取到的是最终确认的文本
+            setTimeout(() => {
+                setIsComposing(false);
+                const confirmedText = e.target.value;
+                
+                // 确保我们处理的是最终的文本
+                setText(confirmedText);
+                setInputCharCount(confirmedText.length);
+                
+                // 只有当输入完成且有文本时才启动翻译
+                if (confirmedText && confirmedText.trim() && autoTranslate) {
+                    startTranslateTimer(confirmedText);
+                }
+            }, 0);
         }
     };
 
@@ -220,6 +232,15 @@ const App = () => {
             if (text.trim()) {
                 handleTranslate();
             }
+        }
+    };
+
+    // 添加专门处理不同浏览器输入事件的函数
+    const handleBeforeInput = (e) => {
+        // 某些浏览器可能在这里需要特殊处理
+        // 目前只记录事件类型，便于调试
+        if (process.env.NODE_ENV === 'development') {
+            console.debug('BeforeInput event:', e.type, e.data);
         }
     };
 
@@ -471,6 +492,7 @@ const App = () => {
                         onCompositionStart={handleComposition}
                         onCompositionUpdate={handleComposition}
                         onCompositionEnd={handleComposition}
+                        onBeforeInput={handleBeforeInput}
                         onInput={handleInput}
                         onPaste={handlePaste}
                         onKeyDown={handleKeyDown}
