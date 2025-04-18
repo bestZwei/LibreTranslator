@@ -125,7 +125,7 @@ const App = () => {
     };
 
     const startTranslateTimer = useCallback((newText) => {
-        if (autoTranslate && newText.trim() && !loading) {
+        if (autoTranslate && newText && newText.trim() && !loading) {
             // Show pending indicator
             setTranslationPending(true);
             
@@ -135,8 +135,8 @@ const App = () => {
             }
             
             // Set a new timer with adaptive delay
-            // Use a longer delay for longer text
-            const delay = Math.min(1500, 1000 + Math.floor(newText.length / 20) * 100);
+            // Use a shorter delay for shorter text, longer delay for longer text
+            const delay = Math.min(1200, 800 + Math.floor(newText.length / 25) * 100);
             
             const newTimer = setTimeout(() => {
                 setTranslationPending(false);
@@ -163,39 +163,60 @@ const App = () => {
             setIsComposing(true);
         } else if (e.type === 'compositionend') {
             setIsComposing(false);
-            const newText = e.target.value;
             // Only start translation when composition ends
-            startTranslateTimer(newText);
+            startTranslateTimer(e.target.value);
         }
     };
 
+    // 修复粘贴功能
     const handlePaste = (e) => {
-        const newText = e.target.value;
-        setText(newText);
-        setInputCharCount(newText.length);
-        // When pasting, we can start translating immediately
+        // 这里直接处理粘贴事件，用setTimeout确保在React状态更新后执行
         setTimeout(() => {
-            startTranslateTimer(newText);
-        }, 100);
+            const pastedText = e.target.value;
+            if (pastedText && pastedText.trim() && autoTranslate) {
+                setText(pastedText);
+                setInputCharCount(pastedText.length);
+                // 立即启动翻译（但仍有短暂延迟，感觉更自然）
+                startTranslateTimer(pastedText);
+            }
+        }, 10);
     };
-    
+
+    // 添加处理剪切和删除操作
+    const handleInput = (e) => {
+        // 仅处理非输入法模式下的输入事件
+        if (!isComposing && e.nativeEvent.inputType) {
+            const inputType = e.nativeEvent.inputType;
+            
+            // 处理剪切、删除和其他非打字输入
+            if (inputType.startsWith('delete') || inputType === 'cut') {
+                const newText = e.target.value;
+                // 只有当文本变化时才启动翻译
+                if (newText !== text && autoTranslate && newText.trim()) {
+                    startTranslateTimer(newText);
+                }
+            }
+        }
+    };
+
     const handleKeyDown = (e) => {
         // Enter key with Ctrl/Cmd for manual translation
         if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
             e.preventDefault();
-            handleTranslate();
             if (typingTimeout) {
                 clearTimeout(typingTimeout);
                 setTranslationPending(false);
             }
+            handleTranslate();
         }
         
-        // If the user presses Enter or Tab, consider it a pause and translate
-        if ((e.key === 'Enter' || e.key === 'Tab') && autoTranslate && !isComposing) {
+        // 如果用户按下Enter或Tab键，立即执行翻译
+        if ((e.key === 'Enter' || e.key === 'Tab') && autoTranslate && !isComposing && text.trim()) {
             if (typingTimeout) {
                 clearTimeout(typingTimeout);
                 setTranslationPending(false);
             }
+            // 确保有文本内容时才触发翻译
             if (text.trim()) {
                 handleTranslate();
             }
@@ -450,6 +471,7 @@ const App = () => {
                         onCompositionStart={handleComposition}
                         onCompositionUpdate={handleComposition}
                         onCompositionEnd={handleComposition}
+                        onInput={handleInput}
                         onPaste={handlePaste}
                         onKeyDown={handleKeyDown}
                         placeholder={t('inputPlaceholder')}
