@@ -67,13 +67,14 @@ const App = () => {
         setHistory(prev => [newHistoryItem, ...prev].slice(0, 50)); // Keep only the last 50 items
     };
 
-    const handleTranslate = async () => {
-        if (!text.trim()) return;
+    const handleTranslate = useCallback(async () => {
+        const currentText = text; // 捕获当前文本状态
+        if (!currentText || !currentText.trim()) return;
         
         setLoading(true);
         try {
             const body = {
-                text: text,
+                text: currentText,
                 target_lang: targetLang
             };
             
@@ -122,24 +123,28 @@ const App = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [text, targetLang, sourceLang, t]);
 
     const startTranslateTimer = useCallback((newText) => {
         if (autoTranslate && newText && newText.trim() && !loading) {
-            // Show pending indicator
+            // 确保我们总是使用最新的文本内容
+            const latestText = typeof newText === 'function' ? newText() : newText;
+            
+            // 显示翻译进行中指示器
             setTranslationPending(true);
             
-            // Clear any existing timers
+            // 清除任何现有的定时器
             if (typingTimeout) {
                 clearTimeout(typingTimeout);
             }
             
-            // Set a new timer with adaptive delay
-            // Use a shorter delay for shorter text, longer delay for longer text
-            const delay = Math.min(1200, 800 + Math.floor(newText.length / 25) * 100);
+            // 设置新的定时器，使用自适应延迟
+            const delay = Math.min(1000, 600 + Math.floor(latestText.length / 30) * 100);
             
             const newTimer = setTimeout(() => {
+                // 在定时器触发时获取最新的文本，而不是使用闭包中的旧值
                 setTranslationPending(false);
+                // 执行翻译，传递一个函数以确保获取最新状态
                 handleTranslate();
             }, delay);
             
@@ -149,12 +154,13 @@ const App = () => {
 
     const handleTextChange = (e) => {
         const newText = e.target.value;
-        setText(newText);
+        setText(newText); // 立即更新文本状态
         setInputCharCount(newText.length);
 
-        // 仅在非输入法编辑模式下触发翻译
+        // 只在非输入法编辑模式下触发翻译
         if (!isComposing && autoTranslate) {
-            startTranslateTimer(newText);
+            // 传递函数以确保在定时器执行时获取最新文本
+            startTranslateTimer(() => newText);
         }
     };
 
@@ -162,36 +168,33 @@ const App = () => {
         if (e.type === 'compositionstart') {
             setIsComposing(true);
         } else if (e.type === 'compositionend') {
-            // 一些浏览器在compositionend事件触发时，e.target.value可能还没有更新
-            // 使用setTimeout确保我们获取到的是最终确认的文本
-            setTimeout(() => {
-                setIsComposing(false);
-                const confirmedText = e.target.value;
-                
-                // 确保我们处理的是最终的文本
-                setText(confirmedText);
-                setInputCharCount(confirmedText.length);
-                
-                // 只有当输入完成且有文本时才启动翻译
-                if (confirmedText && confirmedText.trim() && autoTranslate) {
-                    startTranslateTimer(confirmedText);
+            // 即时更新状态，并确保获取最终文本
+            const finalText = e.target.value;
+            setText(finalText);
+            setInputCharCount(finalText.length);
+            setIsComposing(false);
+            
+            // 使用微任务来确保在React更新DOM后运行
+            queueMicrotask(() => {
+                if (finalText && finalText.trim() && autoTranslate) {
+                    startTranslateTimer(finalText);
                 }
-            }, 0);
+            });
         }
     };
 
     // 修复粘贴功能
     const handlePaste = (e) => {
-        // 这里直接处理粘贴事件，用setTimeout确保在React状态更新后执行
-        setTimeout(() => {
+        // 使用微任务确保状态更新后处理
+        queueMicrotask(() => {
             const pastedText = e.target.value;
             if (pastedText && pastedText.trim() && autoTranslate) {
                 setText(pastedText);
                 setInputCharCount(pastedText.length);
-                // 立即启动翻译（但仍有短暂延迟，感觉更自然）
+                // 直接使用最新粘贴的文本
                 startTranslateTimer(pastedText);
             }
-        }, 10);
+        });
     };
 
     // 添加处理剪切和删除操作
@@ -212,26 +215,15 @@ const App = () => {
     };
 
     const handleKeyDown = (e) => {
-        // Enter key with Ctrl/Cmd for manual translation
+        // Ctrl+Enter 触发手动翻译
         if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
             e.preventDefault();
-            if (typingTimeout) {
-                clearTimeout(typingTimeout);
-                setTranslationPending(false);
-            }
-            handleTranslate();
+            ensureLatestTranslation(true);
         }
         
-        // 如果用户按下Enter或Tab键，立即执行翻译
+        // Enter或Tab键按下时，执行立即翻译
         if ((e.key === 'Enter' || e.key === 'Tab') && autoTranslate && !isComposing && text.trim()) {
-            if (typingTimeout) {
-                clearTimeout(typingTimeout);
-                setTranslationPending(false);
-            }
-            // 确保有文本内容时才触发翻译
-            if (text.trim()) {
-                handleTranslate();
-            }
+            ensureLatestTranslation(true);
         }
     };
 
@@ -243,6 +235,22 @@ const App = () => {
             console.debug('BeforeInput event:', e.type, e.data);
         }
     };
+
+    const ensureLatestTranslation = useCallback((force = false) => {
+        // 如果存在待处理的翻译，取消它并立即执行新的翻译
+        if (typingTimeout || force) {
+            if (typingTimeout) {
+                clearTimeout(typingTimeout);
+                setTypingTimeout(null);
+            }
+            setTranslationPending(false);
+            
+            // 如果有文本且不在加载状态，立即执行翻译
+            if (text && text.trim() && !loading) {
+                handleTranslate();
+            }
+        }
+    }, [text, typingTimeout, loading, handleTranslate]);
 
     useEffect(() => {
         return () => {
@@ -281,6 +289,35 @@ const App = () => {
             localStorage.setItem('uiLanguage', detectedLang);
         }
     }, [i18n]);
+
+    useEffect(() => {
+        // 在输入框失焦时进行最终翻译
+        const handleBlur = () => {
+            if (autoTranslate) {
+                ensureLatestTranslation(true);
+            }
+        };
+        
+        // 输入框获得焦点时的处理
+        const handleFocus = () => {
+            // 可以在这里添加其他逻辑
+        };
+        
+        // 添加事件监听
+        const inputElement = inputRef.current;
+        if (inputElement) {
+            inputElement.addEventListener('blur', handleBlur);
+            inputElement.addEventListener('focus', handleFocus);
+        }
+        
+        return () => {
+            // 清除事件监听
+            if (inputElement) {
+                inputElement.removeEventListener('blur', handleBlur);
+                inputElement.removeEventListener('focus', handleFocus);
+            }
+        };
+    }, [autoTranslate, ensureLatestTranslation, inputRef]);
 
     const handleOutputChange = (e) => {
         setTranslatedText(e.target.value);
