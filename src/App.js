@@ -23,6 +23,9 @@ const App = () => {
     const [historyOpen, setHistoryOpen] = useState(false);
     const [history, setHistory] = useState([]);
     const [detectedLanguage, setDetectedLanguage] = useState('');
+    const [isComposing, setIsComposing] = useState(false);
+    const [typingTimeout, setTypingTimeout] = useState(null);
+    const [translationPending, setTranslationPending] = useState(false);
     
     const inputRef = useRef(null);
     const outputRef = useRef(null);
@@ -123,29 +126,45 @@ const App = () => {
 
     const startTranslateTimer = useCallback((newText) => {
         if (autoTranslate && newText.trim() && !loading) {
-            if (window.translateTimer) {
-                clearTimeout(window.translateTimer);
+            // Show pending indicator
+            setTranslationPending(true);
+            
+            // Clear any existing timers
+            if (typingTimeout) {
+                clearTimeout(typingTimeout);
             }
-            window.translateTimer = setTimeout(() => {
+            
+            // Set a new timer with adaptive delay
+            // Use a longer delay for longer text
+            const delay = Math.min(1500, 1000 + Math.floor(newText.length / 20) * 100);
+            
+            const newTimer = setTimeout(() => {
+                setTranslationPending(false);
                 handleTranslate();
-            }, 1000);
+            }, delay);
+            
+            setTypingTimeout(newTimer);
         }
-    }, [autoTranslate, loading]);
+    }, [autoTranslate, loading, typingTimeout, handleTranslate]);
 
     const handleTextChange = (e) => {
         const newText = e.target.value;
         setText(newText);
         setInputCharCount(newText.length);
 
-        if (!e.nativeEvent.isComposing && 
-            e.nativeEvent.inputType !== 'insertCompositionText') {
+        // Don't start translation if we're in the middle of IME composition
+        if (!isComposing && autoTranslate) {
             startTranslateTimer(newText);
         }
     };
 
     const handleComposition = (e) => {
-        if (e.type === 'compositionend') {
+        if (e.type === 'compositionstart') {
+            setIsComposing(true);
+        } else if (e.type === 'compositionend') {
+            setIsComposing(false);
             const newText = e.target.value;
+            // Only start translation when composition ends
             startTranslateTimer(newText);
         }
     };
@@ -154,7 +173,10 @@ const App = () => {
         const newText = e.target.value;
         setText(newText);
         setInputCharCount(newText.length);
-        startTranslateTimer(newText);
+        // When pasting, we can start translating immediately
+        setTimeout(() => {
+            startTranslateTimer(newText);
+        }, 100);
     };
     
     const handleKeyDown = (e) => {
@@ -162,16 +184,31 @@ const App = () => {
         if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
             e.preventDefault();
             handleTranslate();
+            if (typingTimeout) {
+                clearTimeout(typingTimeout);
+                setTranslationPending(false);
+            }
+        }
+        
+        // If the user presses Enter or Tab, consider it a pause and translate
+        if ((e.key === 'Enter' || e.key === 'Tab') && autoTranslate && !isComposing) {
+            if (typingTimeout) {
+                clearTimeout(typingTimeout);
+                setTranslationPending(false);
+            }
+            if (text.trim()) {
+                handleTranslate();
+            }
         }
     };
 
     useEffect(() => {
         return () => {
-            if (window.translateTimer) {
-                clearTimeout(window.translateTimer);
+            if (typingTimeout) {
+                clearTimeout(typingTimeout);
             }
         };
-    }, []);
+    }, [typingTimeout]);
 
     useEffect(() => {
         const userLang = navigator.language || navigator.userLanguage;
@@ -362,6 +399,9 @@ const App = () => {
                             {sourceLang === 'AUTO' && detectedLanguage && ` (${t(`sourceLanguages.${detectedLanguage}`)})` }
                         </div>
                         <div className="textarea-actions">
+                            {autoTranslate && translationPending && (
+                                <div className="translation-pending-indicator" title={t('translating')}>⋯</div>
+                            )}
                             <button 
                                 className="action-button" 
                                 onClick={() => handleSpeak(text, detectedLanguage || sourceLang)}
@@ -385,6 +425,7 @@ const App = () => {
                         value={text}
                         onChange={handleTextChange}
                         onCompositionStart={handleComposition}
+                        onCompositionUpdate={handleComposition}
                         onCompositionEnd={handleComposition}
                         onPaste={handlePaste}
                         onKeyDown={handleKeyDown}

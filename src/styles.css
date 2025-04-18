@@ -670,6 +670,23 @@ textarea::placeholder {
     text-decoration: underline;
 }
 
+.translation-pending-indicator {
+    color: #5f6368;
+    font-size: 18px;
+    margin-right: 4px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
 /* 在暗色模式下的调整 */
 @media (prefers-color-scheme: dark) {
     body {
@@ -832,6 +849,10 @@ textarea::placeholder {
     
     .clear-history:hover {
         background-color: #444746;
+    }
+    
+    .translation-pending-indicator {
+        color: #9aa0a6;
     }
 }
 
