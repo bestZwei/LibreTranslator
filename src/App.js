@@ -140,9 +140,12 @@ const App = () => {
     const handleComposition = (e) => {
         if (e.type === 'compositionstart') {
             setIsComposing(true);
-        } else {
-            // compositionend
+        } else if (e.type === 'compositionend') {
+            // 结束 IME 编辑后，更新 state 为最终确认文本
             setIsComposing(false);
+            const confirmedText = e.target.value;
+            setText(confirmedText);
+            setInputCharCount(confirmedText.length);
         }
     };
 
