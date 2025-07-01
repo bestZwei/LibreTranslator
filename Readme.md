@@ -35,6 +35,15 @@ LibreTranslator 是一个基于 React 的翻译工具，利用 DeepLx API 提供
 4. Vercel 会自动检测到您使用的是 React 项目。您可以使用默认设置。
 5. 点击 "Deploy"。
 
+#### 3、使用腾讯 EdgeOne Pages 部署
+
+您也可以通过 [腾讯 EdgeOne Pages](https://edgeone.ai/pages) 一键部署 LibreTranslator：
+
+[![Use EdgeOne Pages to deploy](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://edgeone.ai/pages/new?repository-url=https%3A%2F%2Fgithub.com%2Fbestzwei%2FLibreTranslator)
+
+点击上方按钮即可在 EdgeOne Pages 部署本项目。  
+您可以在部署控制台中根据需要调整构建设置和环境变量。
+
 #### 所有部署方式都要配置环境变量
 
 1. **REACT_APP_DEEPLX_API_URL**: `https://api.deeplx.org/<api-key>`  ，不带 `/translate`
