@@ -405,7 +405,9 @@ const App = () => {
                         </div>
                         <div className="textarea-actions">
                             {autoTranslate && (
-                                <div className="translation-pending-indicator" title={t('translating')}>⋯</div>
+                                <div className="translation-pending-indicator" title={t('translating')}>
+                                    <span className="spinner spinner-sm" aria-hidden="true" />
+                                </div>
                             )}
                             <button 
                                 className="action-button" 
@@ -489,13 +491,17 @@ const App = () => {
                 </div>
             </div>
             
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div className="translate-button-wrapper">
                 <button 
                     onClick={handleTranslate} 
                     disabled={loading || !text.trim()} 
-                    className="translate-button"
+                    className={`translate-button ${loading ? 'loading' : ''}`}
                 >
-                    <span className="translate-button-icon">🔄</span>
+                    {loading ? (
+                        <span className="spinner" aria-hidden="true" />
+                    ) : (
+                        <span className="translate-button-icon">🔄</span>
+                    )}
                     {loading ? t('translating') : t('translate')}
                 </button>
             </div>
@@ -538,7 +544,7 @@ const App = () => {
                             </button>
                         </>
                     ) : (
-                        <div style={{ textAlign: 'center', padding: '20px', color: '#666' }}>
+                        <div className="no-history">
                             {t('noHistory')}
                         </div>
                     )}
