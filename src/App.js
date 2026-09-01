@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import './styles.css';
+import { TRANSLATORS, getProviderConfig, translate } from './translators';
 
 const sourceLanguages = ['AUTO', 'ZH', 'AR', 'BG', 'CS', 'DA', 'DE', 'EL', 'EN', 'ES', 'ET', 'FI', 'FR', 'HU', 'ID', 'IT', 'JA', 'KO', 'LT', 'LV', 'NB', 'NL', 'PL', 'PT', 'RO', 'RU', 'SK', 'SL', 'SV', 'TR', 'UK'];
 
@@ -24,6 +25,11 @@ const App = () => {
     const [history, setHistory] = useState([]);
     const [detectedLanguage, setDetectedLanguage] = useState('');
     const [isComposing, setIsComposing] = useState(false);
+    const [provider, setProvider] = useState(
+        localStorage.getItem('translationProvider') ||
+        process.env.REACT_APP_DEFAULT_PROVIDER ||
+        'google'
+    );
     const translateTimerRef = useRef(null);
     
     const inputRef = useRef(null);
@@ -51,6 +57,11 @@ const App = () => {
         localStorage.setItem('translationHistory', JSON.stringify(history));
     }, [history]);
 
+    useEffect(() => {
+        // Save selected provider to localStorage
+        localStorage.setItem('translationProvider', provider);
+    }, [provider]);
+
     const saveToHistory = (sourceText, translatedText, sourceLang, targetLang, detectedLang) => {
         if (!sourceText.trim() || !translatedText.trim()) return;
         
@@ -70,41 +81,24 @@ const App = () => {
         if (!text.trim()) return;
         setLoading(true);
         try {
-            const body = {
-                text: text,
-                target_lang: targetLang
-            };
-            
-            if (sourceLang !== 'AUTO') {
-                body.source_lang = sourceLang;
-            }
-
-            const response = await fetch(`${process.env.REACT_APP_DEEPLX_API_URL}/translate?token=${process.env.REACT_APP_API_TOKEN}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(body)
+            const result = await translate(text, {
+                provider,
+                sourceLang,
+                targetLang
             });
 
-            const data = await response.json();
-
-            if (data.code === 200) {
-                setTranslatedText(data.data);
-                setOutputCharCount(data.data.length);
-                setMessage(t('translationSuccess'));
-                setIsError(false);
-                
-                // If language was auto-detected, store the detected language
-                if (sourceLang === 'AUTO' && data.detected_language) {
-                    setDetectedLanguage(data.detected_language);
-                    saveToHistory(text, data.data, sourceLang, targetLang, data.detected_language);
-                } else {
-                    saveToHistory(text, data.data, sourceLang, targetLang);
-                }
+            const translated = result.translatedText || '';
+            setTranslatedText(translated);
+            setOutputCharCount(translated.length);
+            setMessage(t('translationSuccess'));
+            setIsError(false);
+            
+            // If language was auto-detected, store the detected language
+            if (sourceLang === 'AUTO' && result.detectedLanguage) {
+                setDetectedLanguage(result.detectedLanguage);
+                saveToHistory(text, translated, sourceLang, targetLang, result.detectedLanguage);
             } else {
-                setMessage(t('translationFailed'));
-                setIsError(true);
+                saveToHistory(text, translated, sourceLang, targetLang);
             }
 
             setTimeout(() => {
@@ -120,7 +114,7 @@ const App = () => {
         } finally {
             setLoading(false);
         }
-    }, [text, targetLang, sourceLang, t]);
+    }, [text, targetLang, sourceLang, provider, t]);
 
     useEffect(() => {
         if (autoTranslate && !isComposing && text.trim()) {
@@ -360,6 +354,16 @@ const App = () => {
                             {t('autoTranslate')}
                         </label>
                     </div>
+                    <div className="provider-switcher">
+                        <label>{t('providerLabel')}:</label>
+                        <select value={provider} onChange={(e) => setProvider(e.target.value)}>
+                            {TRANSLATORS.map(p => (
+                                <option key={p.id} value={p.id}>
+                                    {t(p.nameKey)}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
             </div>
             
@@ -504,7 +508,7 @@ const App = () => {
             
             <footer className="footer">
                 <a href="https://github.com/bestZwei/LibreTranslator" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <span> | {t('poweredBy')}</span>
+                <span> | {t('poweredBy', { provider: t(`provider.${provider}`) })}</span>
             </footer>
             
             {/* History Panel */}

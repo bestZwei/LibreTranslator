@@ -15,7 +15,14 @@
   "enterPassword": "Enter password",
   "submit": "Submit",
   "autoTranslate": "Auto Translate",
-  "poweredBy": "Powered by DeepLx",
+  "providerLabel": "Provider",
+  "provider": {
+    "google": "Google Translate",
+    "deeplx": "DeepLX",
+    "libretranslate": "LibreTranslate",
+    "mymemory": "MyMemory"
+  },
+  "poweredBy": "Powered by {{provider}}",
   "swapLanguages": "Swap languages",
   "speak": "Listen",
   "clearText": "Clear text",

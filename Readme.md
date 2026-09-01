@@ -1,9 +1,11 @@
 # LibreTranslator
 
-LibreTranslator 是一个基于 React 的翻译工具，利用 DeepLx API 提供快速和准确的翻译服务。用户可以选择源语言和目标语言，输入文本并获取翻译结果。
+LibreTranslator 是一个基于 React 的翻译工具，支持多个免费翻译接口，默认使用 **Google 翻译**（无需密钥，开箱即用）。用户可以在界面右上角切换翻译接口、选择源语言和目标语言，输入文本并获取翻译结果。
 
 ### 功能
 
+- 内置多个免费翻译接口：Google 翻译（默认）、DeepLX、LibreTranslate、MyMemory
+- 可在界面随时切换翻译接口，选择会被记住
 - 支持多种语言的翻译
 - 友好的用户界面（待完善）
 
@@ -11,7 +13,7 @@ LibreTranslator 是一个基于 React 的翻译工具，利用 DeepLx API 提供
 
 - **前端**: React
 - **样式**: CSS
-- **API**: DeepLx API
+- **API**: 多接口（Google / DeepLX / LibreTranslate / MyMemory）
 
 ### 部署
 
@@ -46,21 +48,39 @@ LibreTranslator 是一个基于 React 的翻译工具，利用 DeepLx API 提供
 
 #### 所有部署方式都要配置环境变量
 
-1. **REACT_APP_DEEPLX_API_URL**: `https://api.deeplx.org/<api-key>`  ，不带 `/translate`
+> 默认接口为 **Google 翻译**，无需任何密钥即可直接使用。只有使用其它接口时才需要配置对应的地址。
 
-   用于存储 DeepLx API 的 URL，以便在请求翻译时使用。`<api-key> `可以从 https://connect.linux.do/ 获取。
+1. **REACT_APP_DEFAULT_PROVIDER（可选）**: 默认翻译接口
+
+   可设为 `google` / `deeplx` / `libretranslate` / `mymemory`，不设置或为空时默认 `google`。
+
+2. **REACT_APP_GOOGLE_API_URL（可选）**: Google 翻译接口地址
+
+   默认 `https://translate.googleapis.com`，一般无需修改。
+
+3. **REACT_APP_DEEPLX_API_URL**: `https://api.deeplx.org/<api-key>`  ，不带 `/translate`
+
+   用于 DeepLX 接口。仅当切换到 DeepLX 时才需要。`<api-key> `可以从 https://connect.linux.do/ 获取。
 
    或者你是Pro用户，参考 [DeepLx文档 ](https://deeplx.owo.network/endpoints/pro.html)使用 `/v1` 请求 ，`https://api.deeplx.org/v1`
 
-2. **REACT_APP_PASSWORD（可选）**: 访问密码
+4. **REACT_APP_LIBRETRANSLATE_URL（可选）**: LibreTranslate 接口地址
+
+   默认 `https://translate.argosopentech.com`，可替换为自建或其它公共实例。
+
+5. **REACT_APP_MYMEMORY_API_URL（可选）**: MyMemory 接口地址
+
+   默认 `https://api.mymemory.translated.net`，无需密钥即可使用（有免费调用额度限制）。
+
+6. **REACT_APP_PASSWORD（可选）**: 访问密码
 
    用于存储访问口令，限制其他人使用你部署的翻译网页。
 
-3. **NODE_OPTIONS**:`--openssl-legacy-provider`   
+7. **NODE_OPTIONS**:`--openssl-legacy-provider`   
 
    这个变量用于配置 Node.js 的选项，通常用于解决某些依赖包的兼容性问题，不设置则可能部署失败。
 
-4. **REACT_APP_API_TOKEN（可选）**：按需修改，如果你是**自建的DeepLx服务**，参考请求链接是 `REACT_APP_DEEPLX_API_URL/translate?token=REACT_APP_API_TOKEN`，填写这两个环境变量。
+8. **REACT_APP_API_TOKEN（可选）**：按需修改，如果你是**自建的DeepLx服务**，参考请求链接是 `REACT_APP_DEEPLX_API_URL/translate?token=REACT_APP_API_TOKEN`，填写这两个环境变量。
 
 
 ---
