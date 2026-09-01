@@ -40,6 +40,10 @@ html,
     box-sizing: border-box;
 }
 
+html, body {
+    overflow-x: hidden;
+}
+
 .input-text-area textarea,
 .output-text-area textarea,
 textarea {
@@ -77,49 +81,6 @@ body {
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-/* ---------- Hero ---------- */
-.hero {
-    text-align: center;
-    padding: 32px 0 4px;
-    margin-bottom: 30px;
-    animation: fadeUp 0.5s ease both;
-}
-
-.hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 12.5px;
-    font-weight: 500;
-    color: var(--text-muted);
-    background: var(--bg-elevated);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 6px 14px;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow-sm);
-}
-
-.hero-title {
-    font-size: clamp(32px, 6vw, 46px);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    margin: 0 0 14px;
-    background: linear-gradient(180deg, var(--text) 0%, var(--text-faint) 130%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.hero-subtitle {
-    font-size: 15.5px;
-    color: var(--text-muted);
-    max-width: 560px;
-    margin: 0 auto;
-    line-height: 1.65;
 }
 
 /* ---------- Theme toggle ---------- */
@@ -719,23 +680,48 @@ textarea::placeholder {
     transform: scale(0.99);
 }
 
+/* ---------- History backdrop ---------- */
+.history-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 999;
+}
+
+.history-backdrop.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
 /* ---------- History panel ---------- */
 .history-panel {
     position: fixed;
     top: 0;
-    right: -340px;
+    right: 0;
+    transform: translateX(100%);
     width: 340px;
     height: 100vh;
     background-color: var(--bg-elevated);
     box-shadow: var(--shadow-lg);
-    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s, opacity 0.3s;
     z-index: 1000;
     overflow-y: auto;
     border-left: 1px solid var(--border);
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .history-panel.open {
-    right: 0;
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .history-header {

@@ -345,12 +345,6 @@ const App = () => {
 
     return (
         <div className="container">
-            <header className="hero">
-                <div className="hero-badge">🌐 {t('heroBadge')}</div>
-                <h1 className="hero-title">{t('heroTitle')}</h1>
-                <p className="hero-subtitle">{t('heroSubtitle')}</p>
-            </header>
-
             <div className="app-header">
                 <div className="app-controls">
                     <div className="language-switcher">
@@ -542,6 +536,11 @@ const App = () => {
                 <span> | {t('poweredBy', { provider: t(`provider.${provider}`) })}</span>
             </footer>
             
+            {/* History backdrop */}
+            <div
+                className={`history-backdrop ${historyOpen ? 'open' : ''}`}
+                onClick={() => setHistoryOpen(false)}
+            />
             {/* History Panel */}
             <div className={`history-panel ${historyOpen ? 'open' : ''}`}>
                 <div className="history-header">
