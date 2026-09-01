@@ -100,5 +100,9 @@
     "ZH": "Chinese",
     "ZH-HANS": "Chinese (Simplified)",
     "ZH-HANT": "Chinese (Traditional)"
-  }
+  },
+  "heroBadge": "Free · Open Source · No API Key",
+  "heroTitle": "Translate freely, without limits",
+  "heroSubtitle": "A free, open-source translation tool powered by multiple providers. Private, fast, and ready to use out of the box.",
+  "toggleTheme": "Toggle theme"
 }

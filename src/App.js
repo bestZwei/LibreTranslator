@@ -30,7 +30,19 @@ const App = () => {
         process.env.REACT_APP_DEFAULT_PROVIDER ||
         'google'
     );
+    const [theme, setTheme] = useState(
+        document.documentElement.getAttribute('data-theme') || 'light'
+    );
     const translateTimerRef = useRef(null);
+
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+    };
     
     const inputRef = useRef(null);
     const outputRef = useRef(null);
@@ -333,8 +345,13 @@ const App = () => {
 
     return (
         <div className="container">
+            <header className="hero">
+                <div className="hero-badge">🌐 {t('heroBadge')}</div>
+                <h1 className="hero-title">{t('heroTitle')}</h1>
+                <p className="hero-subtitle">{t('heroSubtitle')}</p>
+            </header>
+
             <div className="app-header">
-                <h1 className="app-title">LibreTranslator</h1>
                 <div className="app-controls">
                     <div className="language-switcher">
                         <label>Lang:</label>
@@ -365,6 +382,14 @@ const App = () => {
                         </select>
                     </div>
                 </div>
+                <button
+                    className="theme-toggle"
+                    onClick={toggleTheme}
+                    title={t('toggleTheme')}
+                    aria-label={t('toggleTheme')}
+                >
+                    {theme === 'dark' ? '☀️' : '🌙'}
+                </button>
             </div>
             
             <div className="features-bar">
