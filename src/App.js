@@ -423,7 +423,7 @@ const App = () => {
                             {sourceLang === 'AUTO' && detectedLanguage && ` (${t(`sourceLanguages.${detectedLanguage}`)})` }
                         </div>
                         <div className="textarea-actions">
-                            {autoTranslate && (
+                            {autoTranslate && loading && (
                                 <div className="translation-pending-indicator" title={t('translating')}>
                                     <span className="spinner spinner-sm" aria-hidden="true" />
                                 </div>
